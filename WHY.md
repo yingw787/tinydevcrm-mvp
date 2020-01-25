@@ -61,3 +61,45 @@ would be a useful exercise to complete for TinyDevCRM. So without further ado:
 > Why would folks be inclined to use the tool we're creating? Understanding how
 > we are providing value to users will help us determine which features to
 > include and how to prioritize them.
+
+### 10. What risks exist if a poor-intentioned user has access to the product?
+
+> Though we'd love to assume only well-intentioned people will use our software,
+> the reality is that this may not be true. What kind of trouble could occur if
+> a villainous persona gets their hands on our software? Determine what the
+> risks are so we can design to mitigate them?
+
+### 11. Will we have access to users for research and testing?
+
+> Having access to users is crucial for validating the overall product and
+> workflows we create. Be sure to begin the process of locating and scheduling
+> time with users as soon as you can.
+
+## Project Discovery
+
+### 12. What key dates exist?
+
+> Is there an event where someone hopes to demo the software? Is the software
+> itself tied to a specific time of year? It's important to know if there are
+> date-sensitive deliverables to ensure on-time delivery is achieved.
+
+### 13. What are the expected deliverables?
+
+> The detailed scope of the projet will shape over time, but at the start of a
+> project, high-level deliverables should be determined. Is it a mobile app? Is
+> it an API? Does part of the project include training and onboarding the
+> customer's developers once the product is ready to hand off?
+
+### 14. Who is the primary decision maker?
+
+> At the end of the day, who gets to make the final decisions? This ideally
+> should be one person, in order to avoid a decision paralysis or design by
+> committee.
+
+### 15. How might we best work together?
+
+> What are the communication preferences across the team? Will you be working
+> on-site together, or remotely? How often and to what capacity can and will
+> your stakeholders be involved? Set the cadence for the project. I recommend
+> setting up recurring calendar events early on, well before calendars get full
+> and you become blocked on stakeholder feedback.

@@ -3,7 +3,7 @@
 I read through [this
 article](https://spin.atomicobject.com/2020/01/24/new-software-project-questions/)
 on 15 questions to ask at the start of a new software project, that I thought
-would be a useful exercise to complete for TinyDevCRM. So without further ado:
+would be a useful exercise to complete for TinyDevCRM.
 
 ## Product Discovery
 
@@ -13,11 +13,66 @@ would be a useful exercise to complete for TinyDevCRM. So without further ado:
 > to dive into it in the first place. Create space for all stakeholders to
 > respond, as there are likely many different perspectives behind "the why".
 
+I'm building TinyDevCRM primarily for my own use cases. The two problems I have
+coming into this project include how to keep track of my habits for the long
+term, and how to keep in touch with my personal professional network.
+
+This expounded into a broader thought process as to how I can build a platform
+that could generalize these two use cases, and future-proof against any other
+use cases that would crop up with respect to my personal development workflows,
+and perhaps some work-related use cases as well (e.g. a client process to remind
+me to rotate my personal passwords, and rotate my work-related AWS IAM keys, in
+order to follow AWS security best practices).
+
 ### 2. Is there a similar product on the market? If so, how will we differentiate from it?
 
 > Benchmarking what other products exist is a great exercise to do during a
 > Research, Design, and Planning phase. Use this time to understand how this
 > product will be different. What value is it adding that others are lacking?
+
+Here are some products that I've either used, tried out, or looked at when
+thinking about whether I could get away with paying somebody else for a product
+and work on something else.
+
+**[Productive](http://productiveapp.io/) (USED)**: Productive is a generic iOS
+habit tracker. I've used the product now for about two years or so, and so there
+are things I absolutely love about the product and things I really don't like:
+
+Pros:
+
+-
+
+Cons:
+
+-   **Application crashes and data loss**: Productive is highly secure, in the
+    sense that data is colocated on the physical device, and only cloud-based
+    iCloud and locally based iTunes backups are allowed.
+
+    One problem with upgrading iOS applications is that downloading a fresh iOS
+    application results in a different workflow than upgrading an existing iOS
+    application. This means that cloud-based updates to the application, which
+    their developers may mean to download from scratch, may not always work with
+    older, existing deploys of the application. I'm sure they do their best, but
+    on at least one occasion, an update bricked my application. Since I don't
+    pay for iCloud, and since other cloud-based backup solutions are not
+    available, and since I don't have a MacBook Pro available anymore for local
+    iTunes backups (and I forgot the iTunes iPhone backup password), I couldn't
+    restore the application to its prior state. This meant that all of my habits
+    were simply lost and I had to start from scratch, which greatly disrupted my
+    personal critical workflows.
+
+    I would love to have a habit tracker that supports could-native backups,
+    encrypted end-to-end and encrypted at-rest. [Standard
+    Notes](https://standardnotes.org/), another application I use, has a (paid?)
+    feature to email a copy of the entire encrypted copy of your data to your
+    email, with a single-file HTML tool to decrypt that data given the latest
+    encryption key registered on your cloud account, that you can then load into
+    your native application. This is ideally the standard that the habit tracker
+    I use would meet or exceed.
+
+-   **Lack of third-party developer extensibility**:
+
+Ultimately, I found the cons to greatly outweigh the pros.
 
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 

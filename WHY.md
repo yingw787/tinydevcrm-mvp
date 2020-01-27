@@ -1,9 +1,16 @@
 # Why TinyDevCRM?
 
-I read through [this
-article](https://spin.atomicobject.com/2020/01/24/new-software-project-questions/)
-on 15 questions to ask at the start of a new software project, that I thought
-would be a useful exercise to complete for TinyDevCRM.
+Recently, I read through [an article by Sarah Brockett on 15 questions to ask at
+the start of a new software
+project](https://spin.atomicobject.com/2020/01/24/new-software-project-questions/).
+I think completing this exercise for TinyDevCRM would increase clarity and focus
+around the tool's value proposition, both for myself and for others.
+
+This has increased in importance over feedback from others on
+[Pioneer.app](https://pioneer.app/) and [Y Combinator Startup School Winter
+2020's Week 1 Group Session](https://www.startupschool.org) that TinyDevCRM's
+value proposition is not clear, and over my inability to clarify certain
+selling points and answer questions.
 
 ## Product Discovery
 
@@ -24,30 +31,56 @@ and perhaps some work-related use cases as well (e.g. a client process to remind
 me to rotate my personal passwords, and rotate my work-related AWS IAM keys, in
 order to follow AWS security best practices).
 
+I found the most powerful commonalities between these use cases as:
+
+- **Exposing (properly permissioned) access to relevant underlying data**
+
+- **Maintaining some protocol to connect to third-party extensions**
+
+- **Triggering events to third-party processes during their lifetime**
+
+An application that can expose these three properties to a developer building a
+client application, and reduce / remove the burden of having to build out a
+separate data store, data management services, and server-side processes, may
+drastically improve time-to-market or time-to-production for arbitrarily
+designed clients, and provide a central location for data management and prevent
+and/or preclude data fragmentation and data discovery necessities down the line.
+
 ### 2. Is there a similar product on the market? If so, how will we differentiate from it?
 
 > Benchmarking what other products exist is a great exercise to do during a
 > Research, Design, and Planning phase. Use this time to understand how this
 > product will be different. What value is it adding that others are lacking?
 
-Here are some products that I've either used, tried out, or looked at when
-thinking about whether I could get away with paying somebody else for a product
-and work on something else.
+This idea came into my mind during a conversation I had with an engineer at
+Stripe around their favorite internal tooling. I'm not sure how much I should
+say about their response in official writing, given how I have not been granted
+explicit permission to share our private conversation publicly, but I will say
+that their response greatly inspired this idea.
+
+With respect to my immediate problem areas and discovery into platform
+consolidation, here are some products that I've either used, tried out, or
+looked at.
+
+#### Habit Trackers
 
 **[Productive](http://productiveapp.io/) (USED)**: Productive is a generic iOS
 habit tracker. I've used the product now for about two years or so, and so there
-are things I absolutely love about the product and things I really don't like:
+are things I love about the product and things I don't like:
 
 Pros:
 
--   **Natively mobile**: Productive ties extremely well with the iOS ecosystem,
-    which means in-app push notifications (vs. having to install another native
+-   **Native mobile**: Productive is a native iOS application (vs. something
+    like a [progressive web
+    application](https://en.wikipedia.org/wiki/Progressive_web_application)),
+    which means in-app push notifications (no need to install another native
     application like [Pushover](https://pushover.net/)), touch-first and
-    swipe-first UI/UX, and portable wherever the iPhone goes.
+    swipe-first UI/UX, etc.
 
 -   **Offline-first access**: I don't need to have an Internet network
     connection through cellular or Wi-Fi in order to access or use the
-    application.
+    application, since the master copy of the data is colocated with the
+    application at all times. The application can go wherever my iPhone goes.
 
 -   **Forgiving UI/UX**: Unlike other habit trackers, Productive does not
     enforce default habits (you can start with however many habits makes you
@@ -56,9 +89,10 @@ Pros:
     habit), limit the number of habits available (some habit tracker apps do
     this as a premium feature), or set hard deadlines as to when habits can be
     marked as completed or skipped. This forgiving nature makes it very easy to
-    forgive yourself when you lapse in your habit, and track your habits at your
-    pace. This is likely the biggest reason I successfully onboarded and
-    converted.
+    forgive yourself when you lapse in your habit, and empowers you to track
+    your habits at your pace. This is likely the biggest reason I successfully
+    onboarded and converted to the application in the first place, and
+    conversely failed to convert to other platforms.
 
 Cons:
 
@@ -107,6 +141,48 @@ consider it my top pressure point. I do think the application stands heads and
 shoulders above everything else I've tried (which is why I gladly pay money to
 Productive for usage of the application), but I think I've acquired enough
 skills to take a shot at this problem myself.
+
+#### To-Do Lists
+
+-   **[Todoist]()**
+
+I realized that to-do lists target a different use case than a habit tracker.
+Some of the key differences include:
+
+#### CRMs
+
+-   **[MonicaHQ](https://www.monicahq.com/) (LOOKED AT)**: This is the closest
+    product I've found that represents something akin to what I want to build.
+    Monica's goal is to help people build more meaningful relationships.
+    Multiple people have recommended that I look into Monica HQ instead of
+    building my own product, and their advice takes great credence.
+
+    Ultimately, I decided to decline proceeding with paying for Monica or
+    deploying my own instance of Monica. The honest, largest answer as to why is
+    because by the time people recommended it to me my heart was already set on
+    building my own CRM. However, there are a number of concerns I immediately
+    had after reviewing the README:
+
+    -   At **$9 / month**, the pricing seems both quite high in comparison to
+        Productive (where I am paying $9 / year or **75 cents / month** for
+        premium) and Standard Notes (where I paid $149 / five years or **$2.48 /
+        month** for premium), and yet low enough where I'm concerned development
+        may cease sometime in the future. As a point of reference, Slack (the
+        web-based chat / collaboration tool) charges somewhere around $200 /
+        user for low-grade enterprise plans:
+
+        > “On Business Plus, $208.70 per user (850 Users, annual plan). It's an
+        > unadvertised tier between business and enterprise that gives some
+        > additional features, including the eDiscovery API for compliance.”
+        >
+        > [Capiche.com's post on Slack
+        > pricing](https://www.capiche.com/e/slack-pricing)
+
+        I believe that for B2B SaaS tools, large customers (or "whales") make up
+        the majority of net profit, hence the shift for many SaaS companies to
+        provide enterprise-friendly features over time (potentially at the cost
+        of customer acquisition) as the product matures and achieves
+        product/market fit.
 
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 

@@ -40,7 +40,25 @@ are things I absolutely love about the product and things I really don't like:
 
 Pros:
 
--
+-   **Natively mobile**: Productive ties extremely well with the iOS ecosystem,
+    which means in-app push notifications (vs. having to install another native
+    application like [Pushover](https://pushover.net/)), touch-first and
+    swipe-first UI/UX, and portable wherever the iPhone goes.
+
+-   **Offline-first access**: I don't need to have an Internet network
+    connection through cellular or Wi-Fi in order to access or use the
+    application.
+
+-   **Forgiving UI/UX**: Unlike other habit trackers, Productive does not
+    enforce default habits (you can start with however many habits makes you
+    comfortable), default habit behaviors (a habit follows a specific grammar
+    and is marked on that basis, does not couple with other instances of that
+    habit), limit the number of habits available (some habit tracker apps do
+    this as a premium feature), or set hard deadlines as to when habits can be
+    marked as completed or skipped. This forgiving nature makes it very easy to
+    forgive yourself when you lapse in your habit, and track your habits at your
+    pace. This is likely the biggest reason I successfully onboarded and
+    converted.
 
 Cons:
 
@@ -70,9 +88,25 @@ Cons:
     your native application. This is ideally the standard that the habit tracker
     I use would meet or exceed.
 
--   **Lack of third-party developer extensibility**:
+-   **Lack of third-party developer extensibility**: Productive.app is a closed
+    environment with no available developer API. This means that additional
+    analytics and view representations around habits cannot be tracked beyond
+    what the app developers have provided. Currently, this is limited to what
+    days of the month have you completed a specific habit.
 
-Ultimately, I found the cons to greatly outweigh the pros.
+-   **Opaque underlying data representation**: I have no idea how my data is
+    saved. I would not be surprised if a NoSQL backing, and the lack of highly
+    structured migrations, causes the application upgrade process to result in
+    the data loss I've been experiencing.
+
+Ultimately, I found the cons to outweigh the pros; the data loss and lack of
+visibility into the underlying data representation and confidence in application
+upgrades is especially egregious to my personal workflows. Considering how much
+my personal workflow ties into how effective I am at other parts of my life, I
+consider it my top pressure point. I do think the application stands heads and
+shoulders above everything else I've tried (which is why I gladly pay money to
+Productive for usage of the application), but I think I've acquired enough
+skills to take a shot at this problem myself.
 
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 

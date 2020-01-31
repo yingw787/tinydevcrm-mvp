@@ -12,9 +12,10 @@ This has increased in importance over feedback from others on
 value proposition is not clear, and over my inability to clarify certain
 selling points and answer questions on the spot at that time.
 
-Since this document should be tracked at all times via version control, and the
+This document should be tracked at all times via version control. Since the
 `git` history is open-source, no `'last_modified'` date will be provided at this
-time.
+time. Ideally, this document should achieve a "done" status, and is not intended
+as a living document where shared understanding is continually updated.
 
 ## Product Discovery
 

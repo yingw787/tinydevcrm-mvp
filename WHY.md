@@ -323,3 +323,7 @@ following:
   track of issues on GitHub Issues would be a start. I can link to GitHub Issues
   from various points on TinyDevCRM, and ask around for the best automation /
   tooling / infrastructure FOSS maintainers use on GitHub Issues.
+
+I'll likely have additional ways in order to establish feedback loops, but
+having as much feedback and constructive criticism as frequently as possible is
+critical to my professional development and to the success of this project.

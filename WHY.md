@@ -275,21 +275,23 @@ Some of the key differences include:
     product I've found that represents something akin to what I want to build.
     Monica's goal is to help people build more meaningful relationships.
     Multiple people have recommended that I look into Monica HQ instead of
-    building my own product, and their advice takes great credence.
+    building my own product, and their advice takes great credence for this
+    analysis.
 
     Ultimately, I decided to decline proceeding with paying for Monica or
     deploying my own instance of Monica. The honest, largest answer as to why is
     because by the time people recommended it to me my heart was already set on
-    building my own CRM. However, there are a number of concerns I immediately
+    building my own "CRM". However, there are a number of concerns I immediately
     had after reviewing the README:
 
-    -   At **$9 / month**, the pricing seems both quite high in comparison to
-        Productive (where I am paying $9 / year or **75 cents / month** for
-        premium) and Standard Notes (where I paid $149 / five years or **$2.48 /
-        month** for premium), and yet low enough where I'm concerned development
-        may cease sometime in the future. As a point of reference, Slack (the
-        web-based chat / collaboration tool) charges somewhere around $200 /
-        user for low-grade enterprise plans:
+    -   **Low prices**: At $9 / month, the pricing seems both quite high in
+        comparison to Productive (where I am paying $9 / year or **75 cents /
+        month** for premium) and Standard Notes (where I paid $149 / five years
+        or **$2.48 / month** for premium), and yet low enough where I'm
+        concerned development (including security patches) may cease sometime in
+        the future. As a point of reference, Slack (the web-based chat /
+        collaboration tool) charges somewhere around $200 / user for low-grade
+        enterprise plans:
 
         > “On Business Plus, $208.70 per user (850 Users, annual plan). It's an
         > unadvertised tier between business and enterprise that gives some
@@ -298,11 +300,48 @@ Some of the key differences include:
         > [Capiche.com's post on Slack
         > pricing](https://www.capiche.com/e/slack-pricing)
 
-        I believe that for B2B SaaS tools, large customers (or "whales") make up
-        the majority of net profit, hence the shift for many SaaS companies to
-        provide enterprise-friendly features over time (potentially at the cost
-        of customer acquisition) as the product matures and achieves
-        product/market fit.
+        That is the lowest-grade Slack plan, and I believe that they run up to
+        $700 / user / month. I don't think MonicaHQ has enterprise-grade plans
+        at all, which means they can't make up for the shortfall in revenue from
+        single users with enterprise users. Given my extremely positive
+        experiences with todo lists and habit trackers, I would pretty happily
+        pay **$30-50 / month** to have a Standard Notes like experience for
+        Productive, potentially with added analytics, given an explicit value
+        prop, to have a guarantee of software that [lasts 50
+        years](https://bytes.yingw787.com/posts/2020/01/13/50years/). I'm not
+        sure how common this is though. I don't know if a company created off of
+        users like me would be viable.
+
+    -   **Application of unstructured data**: To be clear, I think one goal of a
+        CRM for non-technical stakeholders is to colocate all the requisite
+        information in one place. However, my optimization constraints are quite
+        different from the average non-technical user's; I am worried about
+        cost, performance, and security, and not convenience and ease of use.
+
+        I'm concerned that adding blob storage would drastically complicate
+        things. How would daily backups work if you were to naively send a
+        permissioned snapshot of blobs to a user, and pay for that network
+        traffic and machine instance time? Do you even encrypt blobs, and if so,
+        how much overhead would that take up? How would storage costs increase
+        with blobs? What kinds of new correctness issues and security overhead
+        would take place if data was colocated in two different locations
+        (database and blob storage)?
+
+        To me, unstructured data like this isn't just unnecessary, it's a
+        dangerous boundary to cross when establishing feature requirements.
+
+    -   **Fixed data representation**: The API documentation for Monica is
+        admirable, and one thing it focuses on really well is how each of the
+        underlying models is backed. You can describe relationships,
+        conversations, photos, and perhaps most importantly for TinyDevCRM, how
+        to structure reminders. However, since I don't want the strict
+        limitation of fixed database models, and since I am a technical
+        stakeholder, I'd want to have something a bit more generalized, like
+        `/views` or `/triggers`.
+
+    Overall, I think Monica HQ is a great standalone CRM, very reasonably
+    priced, and probably fine for 80-90% of personal tasks. But I don't think
+    it's the right fit for me.
 
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 

@@ -343,6 +343,11 @@ Some of the key differences include:
     priced, and probably fine for 80-90% of personal tasks. But I don't think
     it's the right fit for me.
 
+I don't think there are other CRMs that are targeted towards technical
+stakeholders for personal use. The vast majority of CRM solutions are
+enterprise-first, targeted towards non-technical stakeholders and users, and not
+a fit at all for my needs.
+
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 
 > Does the product include a wearable device? Does it need to tie into other

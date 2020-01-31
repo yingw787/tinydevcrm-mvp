@@ -161,23 +161,58 @@ and shoulders above everything else I've tried (which is why I gladly pay money
 to Productive for usage of the application), but I think I've acquired enough
 skills to take a shot at this problem myself.
 
+__________
+
+I haven't tried too many habit trackers because:
+
+-   To get an apples to apples comparison, you need to purchase a premium
+    subscription, which frequently requires a credit card or registration
+    through Apple Pay. This is a huge turn-off towards exploration, because I
+    have to remember to cancel the subscription and because there's no longer a
+    property-based guarantee that my card won't get charged (since it's
+    registered).
+
+-   Onboarding onto a new habit tracker is risky. The longer it takes, the more
+    likely it is that you'll stop using any habit tracker entirely. I'm
+    extremely risk-averse in this regards.
+
 #### To-Do Lists
 
 **[Standard Notes](https://standardnotes.org/) (USED)**: I've used Standard
 Notes for a year and some change now, and I have almost no complaints. It's
-proven so effective in my personal usage
+proven so effective in my personal usage, the ideal version of TinyDevCRM would
+apply many of the learnings and benefits I've found through Standard Notes.
 
 Pros:
 
--   **Open-source and self-hostable**:
+-   **Open-source and self-hostable**: I paid $150 or $3 / month for the 5 year
+    plan. If Standard Notes ever goes under, the code is open sourced on GitHub,
+    and I can host my own server on an AWS EC2 instance.
 
--   **Security-oriented**:
+-   **Backups**: All of my Standard Notes clients back up in local files, and
+    the server-side backups are (by user configuration) emailed to me every day.
+    I have *one* file that I would need to import into a client in order to
+    properly set up the data from my entire time on Standard Notes.
 
--   **Extensible**:
+-   **Security-oriented**: All backups are encrypted at rest. The daily backups
+    email contains a complementary HTML file that decrypts the data given a
+    user-provided decryption key, and works without having network access.
+    Clients require email authentication and multi-factor authentication is
+    available. On top of this, a number-based or alphanumeric-based passcode can
+    be set on each client to enable screen lock after a certain amount of time,
+    in case somebody gained access to the laptop itself. On top of this,
+    individual notes can be locked, requiring the top-level password to be
+    passed in order to view contents. Individual notes can also be archived in
+    order to hide them from the default view.
 
--   **Backups**:
+    I love this security model and have, at some point in time and to some
+    degree, enabled all of the above. The more security available, the better.
 
--   **Support**:
+-   **Extensible**: Standard Notes has a great extensions ecosystem, where
+    plugins are curated to work with the latest clients. I use the Secure
+    Spreadsheets option, TokenVault to store 2FA tokens, as well as the
+    Solarized Dark theme in order to work long evenings on desktop Linux, where
+    dynamic brightness adjustment is not always supported well on all devices.
 
 Cons:
 

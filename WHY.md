@@ -77,8 +77,8 @@ are things I love about the product and things I don't like:
 
 Pros:
 
--   **Native mobile**: Productive is a native iOS application (vs. something
-    like a [progressive web
+-   **Native mobile support**: Productive is a native iOS application (vs.
+    something like a [progressive web
     application](https://en.wikipedia.org/wiki/Progressive_web_application)),
     which means in-app push notifications (no need to install another native
     application like [Pushover](https://pushover.net/)), touch-first and
@@ -88,37 +88,43 @@ Pros:
     connection through cellular or Wi-Fi in order to access or use the
     application, since the master copy of the data is colocated with the
     application at all times. The application can go wherever my iPhone goes.
+    This is a *huge* win in comparison to a purely Internet-based client.
 
 -   **Forgiving UI/UX**: Unlike other habit trackers, Productive does not
     enforce default habits (you can start with however many habits makes you
-    comfortable), default habit behaviors (a habit follows a specific grammar
-    and is marked on that basis, does not couple with other instances of that
-    habit), limit the number of habits available (some habit tracker apps do
-    this as a premium feature), or set hard deadlines as to when habits can be
-    marked as completed or skipped. This forgiving nature makes it very easy to
-    forgive yourself when you lapse in your habit, and empowers you to track
-    your habits at your pace. This is likely the biggest reason I successfully
-    onboarded and converted to the application in the first place, and
-    conversely failed to convert to other platforms.
+    comfortable), doesn't set default habit behaviors (a habit follows a
+    specific user-specified grammar and is marked on that basis, and each
+    instance of that habit does not couple with other instances of that habit),
+    does not limit the number of habits available (some habit tracker apps do
+    this as a premium feature), and does not set hard deadlines as to when
+    habits can be marked as completed or skipped.
+
+    This forgiving nature makes it very easy to forgive yourself when you lapse
+    in your habit, and empowers you to track your habits at your pace. This is
+    likely the biggest reason I successfully onboarded and converted to the
+    application in the first place, and conversely failed to convert to other
+    platforms.
 
 Cons:
 
 -   **Application crashes and data loss**: Productive is highly secure, in the
     sense that data is colocated on the physical device, and only cloud-based
-    iCloud and locally based iTunes backups are allowed.
+    iCloud and locally based iTunes backups are allowed. This comes at the cost
+    of maintaining a unitary upgrade path, with severe consequences for data
+    integrity.
 
     One problem with upgrading iOS applications is that downloading a fresh iOS
     application results in a different workflow than upgrading an existing iOS
     application. This means that cloud-based updates to the application, which
     their developers may mean to download from scratch, may not always work with
-    older, existing deploys of the application. I'm sure they do their best, but
-    on at least one occasion, an update bricked my application. Since I don't
-    pay for iCloud, and since other cloud-based backup solutions are not
-    available, and since I don't have a MacBook Pro available anymore for local
-    iTunes backups (and I forgot the iTunes iPhone backup password), I couldn't
-    restore the application to its prior state. This meant that all of my habits
-    were simply lost and I had to start from scratch, which greatly disrupted my
-    personal critical workflows.
+    older, existing deploys of the application. I'm sure the developers of
+    Productive do their best, but on at least two occasions, an update bricked
+    my application and I lost my data. Since I don't pay for iCloud, and since
+    other cloud-based backup solutions are not available, and since I don't have
+    a MacBook Pro available anymore for local iTunes backups (and I forgot the
+    iTunes iPhone backup password), I couldn't restore the application to its
+    prior state. This meant that all of my habits were simply lost and I had to
+    start from scratch, which greatly disrupted my personal critical workflows.
 
     I would love to have a habit tracker that supports could-native backups,
     encrypted end-to-end and encrypted at-rest.
@@ -126,13 +132,25 @@ Cons:
 -   **Lack of third-party developer extensibility**: Productive.app is a closed
     environment with no available developer API. This means that additional
     analytics and view representations around habits cannot be tracked beyond
-    what the app developers have provided. Currently, this is limited to what
-    days of the month have you completed a specific habit.
+    what the app developers have provided. It also means that no extensions
+    ecosystem is possible.
 
 -   **Opaque underlying data representation**: I have no idea how my data is
     saved. I would not be surprised if a NoSQL backing, and the lack of highly
-    structured migrations, causes the application upgrade process to result in
+    structured migrations causes the application upgrade process to result in
     the data loss I've been experiencing.
+
+-   **UI/UX changes**: I don't remember which founder said this (maybe from
+    Basecamp, or Fog Creek, or MicroConf), but they said the only way in order
+    to gain new sales and maintain / increase user conversion was to release a
+    new version of their product with new features. Not tinkering with sales
+    channels like advertising or referrals, or increasing customer support or
+    refactoring existing features and increasing performance. For a tool like a
+    habit tracker where I need something reliable and steady in a changing
+    world, **this is absolutely a deal breaker**. There have been at least two
+    jarring UX changes I've experienced through Productive. I understand they
+    have families to feed and investors to please, and the changes aren't bad,
+    it's just that for me in this specific context, I don't like change.
 
 Ultimately, I found the cons to outweigh the pros. The data loss and lack of
 visibility into the underlying data representation and confidence in application
@@ -327,3 +345,6 @@ following:
 I'll likely have additional ways in order to establish feedback loops, but
 having as much feedback and constructive criticism as frequently as possible is
 critical to my professional development and to the success of this project.
+After ensuring the proof of concept works and beginning the software development
+lifecycle, establishing and exercising means of communications will be amongst
+my highest priorities (#1 - #3).

@@ -353,13 +353,37 @@ a fit at all for my needs.
 There's actually quite a few integrations frameworks available, which suit the
 needs of technical stakeholders and users like me far better.
 
--   **[Zapier](https://zapier.com/home)**:
+-   **[Zapier](https://zapier.com/home)**: Zapier is the quintessential
+    integrations company. As I'm writing this, their landing page describes
+    1,500 integrations available. It's a terrific resource if you're building
+    something for a company, or if you're a non-technical stakeholder.
 
--   **[tray.io](https://tray.io/)**:
+    For my use case, I'd prefer to have a standards-compliant protocol for
+    managing third-party extensions and integrations, rather than building out
+    my own platform. Building a platform is a *lot* of work, and a lot of effort
+    to maintain. I'd also prefer to have an API rather than a client. The
+    fundamental limitation is that it's closed-source. Even as Zapier is a
+    profitable company with a highly admirable funding journey, I'm not sure
+    where it will be in 50 years. That's not risk I'm willing to bear.
 
--   **[IFTTT](https://ifttt.com/)**:
+-   **[tray.io](https://tray.io/)**: I think this is a platform similar to that
+    of Zapier. Also disqualified due to closed-source nature.
 
--   **[`huginn`](https://github.com/huginn/huginn)**:
+-   **[IFTTT](https://ifttt.com/)**: IFTTT used to be open for third-party
+    developers, now their landing page is just a "let's talk" form with a navbar
+    item that says "For businesses". I'm not sure how they're doing, but this is
+    the kind of risk I don't want to bear.
+
+-   **[`huginn`](https://github.com/huginn/huginn)**: `huginn` is a "system for
+    building agents that perform automated tasks for you online". This, along
+    with Monica HQ, is the closest a solution has come to solving my problem.
+    However, it's quite feature-rich; it has plans in order to abstract away
+    agents into separate Ruby gems, but understandably it takes time to build
+    alignment within the open source community and time for unpaid developers to
+    do so.
+
+    I'm definitely going to review `huginn` (e.g. using `gource`) to see whether
+    I can get some inspirations on protocol design and selection.
 
 -   **[`n8n.io`](https://n8n.io/)**: `n8n` markets itself as a "Free and
     Self-hostable Alternative to Zapier / tray.io". It seems nice.
@@ -375,7 +399,7 @@ needs of technical stakeholders and users like me far better.
     around 0.1% CPU (including `htop`, which I keep running in a concurrent
     window using `tmux`).
 
-    Immediately disqualified.
+    Disqualified.
 
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 

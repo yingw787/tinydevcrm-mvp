@@ -407,7 +407,26 @@ needs of technical stakeholders and users like me far better.
 > internal or external systems? Integrations will shape both the design and
 > development approach, so knowing about them from the get-go is ideal.
 
-Most
+I don't think there are any other products or tools to form explicit
+integrations within this walled garden.
+
+I'm pretty sure of the initial tech stack I'd like to use to get the initial 0.x
+releases out for feature parity. React.js (MIT licensed, created and backed by
+Facebook engineers, battle-tested and with battle-tested dependencies like
+`react-router` and `redux`), Python (#1 or #2 most common programming language
+in the world, aged the past 20 years quite well, learned lessons from 2 -> 3
+migration), and PostgreSQL (most popular open-source SQL database in the world,
+[apparently a better wire
+protocol](https://www.cockroachlabs.com/blog/why-postgres/), a great extensions
+ecosystem, enterprise and NewSQL enterprise support, a great procedural
+extensions DSL, and twenty years of development including experience with bugs
+like [fsyncgate](https://danluu.com/fsyncgate/)).
+
+In terms of protocols: REST on HTTP seems reasonable; REST is explicitly a
+stateless protocol, and hypertext is necessary to serve HTML, which I'd like to
+use to create graphics-based clients vs. purely CLI or text-based clients. SQL,
+or the PostgreSQL flavor of SQL, is another standard to support. Then x86_64 as
+the underlying ISA. Everything else should be disposable or mutable as needed.
 
 ## Business Discovery
 

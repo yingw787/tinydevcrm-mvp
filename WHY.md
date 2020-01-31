@@ -10,7 +10,11 @@ This has increased in importance over feedback from others on
 [Pioneer.app](https://pioneer.app/) and [Y Combinator Startup School Winter
 2020's Week 1 Group Session](https://www.startupschool.org) that TinyDevCRM's
 value proposition is not clear, and over my inability to clarify certain
-selling points and answer questions.
+selling points and answer questions on the spot at that time.
+
+Since this document should be tracked at all times via version control, and the
+`git` history is open-source, no `'last_modified'` date will be provided at this
+time.
 
 ## Product Discovery
 
@@ -29,7 +33,9 @@ that could generalize these two use cases, and future-proof against any other
 use cases that would crop up with respect to my personal development workflows,
 and perhaps some work-related use cases as well (e.g. a client process to remind
 me to rotate my personal passwords, and rotate my work-related AWS IAM keys, in
-order to follow AWS security best practices).
+order to follow AWS security best practices, or a Google Home or
+$SMART_DEVICE_OF_THE_DECADE client in order to keep track of my habits in
+addition to the web client).
 
 I found the most powerful commonalities between these use cases as:
 
@@ -37,14 +43,14 @@ I found the most powerful commonalities between these use cases as:
 
 - **Maintaining some protocol to connect to third-party extensions**
 
-- **Triggering events to third-party processes during their lifetime**
+- **Triggering events and notifying third-party processes of said events**
 
 An application that can expose these three properties to a developer building a
 client application, and reduce / remove the burden of having to build out a
 separate data store, data management services, and server-side processes, may
-drastically improve time-to-market or time-to-production for arbitrarily
-designed clients, and provide a central location for data management and prevent
-and/or preclude data fragmentation and data discovery necessities down the line.
+drastically improve time-to-market or time-to-production for arbitrary clients,
+and provide a central location for data management and prevent and/or preclude
+data fragmentation and data discovery needs down the line.
 
 ### 2. Is there a similar product on the market? If so, how will we differentiate from it?
 
@@ -114,13 +120,7 @@ Cons:
     personal critical workflows.
 
     I would love to have a habit tracker that supports could-native backups,
-    encrypted end-to-end and encrypted at-rest. [Standard
-    Notes](https://standardnotes.org/), another application I use, has a (paid?)
-    feature to email a copy of the entire encrypted copy of your data to your
-    email, with a single-file HTML tool to decrypt that data given the latest
-    encryption key registered on your cloud account, that you can then load into
-    your native application. This is ideally the standard that the habit tracker
-    I use would meet or exceed.
+    encrypted end-to-end and encrypted at-rest.
 
 -   **Lack of third-party developer extensibility**: Productive.app is a closed
     environment with no available developer API. This means that additional
@@ -133,18 +133,49 @@ Cons:
     structured migrations, causes the application upgrade process to result in
     the data loss I've been experiencing.
 
-Ultimately, I found the cons to outweigh the pros; the data loss and lack of
+Ultimately, I found the cons to outweigh the pros. The data loss and lack of
 visibility into the underlying data representation and confidence in application
-upgrades is especially egregious to my personal workflows. Considering how much
-my personal workflow ties into how effective I am at other parts of my life, I
-consider it my top pressure point. I do think the application stands heads and
-shoulders above everything else I've tried (which is why I gladly pay money to
-Productive for usage of the application), but I think I've acquired enough
+upgrades prove especially egregious to my personal workflows. Considering how
+much my personal workflow affects how effective I am at other parts of my life,
+I consider it my top pressure point. I do think this application stands heads
+and shoulders above everything else I've tried (which is why I gladly pay money
+to Productive for usage of the application), but I think I've acquired enough
 skills to take a shot at this problem myself.
 
 #### To-Do Lists
 
--   **[Todoist]()**
+**[Standard Notes](https://standardnotes.org/) (USED)**: I've used Standard
+Notes for a year and some change now, and I have almost no complaints. It's
+proven so effective in my personal usage
+
+Pros:
+
+-   **Open-source and self-hostable**:
+
+-   **Security-oriented**:
+
+-   **Extensible**:
+
+-   **Backups**:
+
+-   **Support**:
+
+Cons:
+
+-   **Syncing could be better**: When there is a merge conflict between
+    different versions of notes for Standard Notes, both
+
+[Standard
+    Notes](https://standardnotes.org/), another application I use, has a (paid?)
+    feature to email a copy of the entire encrypted copy of your data to your
+    email, with a single-file HTML tool to decrypt that data given the latest
+    encryption key registered on your cloud account, that you can then load into
+    your native application. This is ideally the standard that the habit tracker
+    I use would meet or exceed.
+
+-   **[Todoist](https://todoist.com/) (USED)**:
+
+-   **[Remember the Milk](https://www.rememberthemilk.com/) (USED)**:
 
 I realized that to-do lists target a different use case than a habit tracker.
 Some of the key differences include:
@@ -268,3 +299,26 @@ Some of the key differences include:
 > your stakeholders be involved? Set the cadence for the project. I recommend
 > setting up recurring calendar events early on, well before calendars get full
 > and you become blocked on stakeholder feedback.
+
+I'm currently working on this problem by myself, and since the product is for
+myself, there's no feedback loops in order to release / ship product. The flip
+side is this project may become rather lonely without external support and if I
+don't ship at a fast enough speed. In order to combat this, I can do the
+following:
+
+- Publish a weekly stand-up thread, either on my personal techblog [Bytes by
+  Ying](https://bytes.yingw787.com), or on a dedicated notes.tinydevcrm.com
+  release website. The former might be easier to get started with, and the
+  latter would be if there was signficant inertia in the project and a clear
+  ability to monetize somehow (which again isn't a top priority for me).
+
+- Continue to publish benchmarks on both [Pioneer.app](https://pioneer.app) and
+  on [the Indie Hackers Daily Stand-up
+  thread](https://www.indiehackers.com/group/daily-stand-up), and possibly ask
+  folks for support or where they get sources of support there.
+
+- Have a public issues dashboard or Kanban board where users would be able to
+  (anonymously?) suggest feedback. Since I'm using GitHub at the moment, keeping
+  track of issues on GitHub Issues would be a start. I can link to GitHub Issues
+  from various points on TinyDevCRM, and ask around for the best automation /
+  tooling / infrastructure FOSS maintainers use on GitHub Issues.

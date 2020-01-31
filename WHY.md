@@ -1,4 +1,4 @@
-# Why TinyDevCRM?
+# Why TinyDevCRM? A Product Discovery Roadmap
 
 Recently, I read through [an article by Sarah Brockett on 15 questions to ask at
 the start of a new software
@@ -183,6 +183,13 @@ Notes for a year and some change now, and I have almost no complaints. It's
 proven so effective in my personal usage, the ideal version of TinyDevCRM would
 apply many of the learnings and benefits I've found through Standard Notes.
 
+I use Standard Notes as a todo list application in the most basic, primitive way
+possible. I have a note for every day, and each note has a bulleted list of
+things to check off. If they're checked off, I suffix the point with "DONE" and
+add a short description if relevant, and leave the note until I flush the
+contents to my Google spreadsheets and archive the note. If the todo is not
+finished, then I cut or copy and paste it to the note representing the next day.
+
 Pros:
 
 -   **Open-source and self-hostable**: I paid $150 or $3 / month for the 5 year
@@ -217,22 +224,50 @@ Pros:
 Cons:
 
 -   **Syncing could be better**: When there is a merge conflict between
-    different versions of notes for Standard Notes, both
+    different versions of notes for Standard Notes, both copies persist, with a
+    bright red "Conflicted copy" label present. I actually really like how both
+    copies are persisted (vs. overwriting or dropping one of the copies), but
+    there have been slight issues with multiple conflicted copies, and having to
+    manually address those conflicts without the help of `git`'s `>>>>>>HEAD`
+    syntax (since this tool is for non-technical stakeholders). Again, beautiful
+    way of handling this situation, but if there are constraints enforced on the
+    customer base, I think this feature could be even more powerful.
 
-[Standard
-    Notes](https://standardnotes.org/), another application I use, has a (paid?)
-    feature to email a copy of the entire encrypted copy of your data to your
-    email, with a single-file HTML tool to decrypt that data given the latest
-    encryption key registered on your cloud account, that you can then load into
-    your native application. This is ideally the standard that the habit tracker
-    I use would meet or exceed.
+-   **[Todoist](https://todoist.com/) (USED)**: I never successfully onboarded
+    to Todoist. I didn't like the grammar parsing, the binning of incomplete
+    tasks, and the lack of access to the underlying data representation. Much of
+    the same reasons I don't think I'm the right fit for Productive for my
+    long-term habit tracker, I don't think I'm the right fit for Todoist for a
+    todo list.
 
--   **[Todoist](https://todoist.com/) (USED)**:
-
--   **[Remember the Milk](https://www.rememberthemilk.com/) (USED)**:
+-   **[Remember the Milk](https://www.rememberthemilk.com/) (USED)**: I tried
+    out the premium plan for Remember the Milk in order to replace my habit
+    tracker. I quickly found out that the workflow for a habit tracker is much
+    different than the workflow for a todo list, and quickly became overwhelmed
+    and deplatformed.
 
 I realized that to-do lists target a different use case than a habit tracker.
 Some of the key differences include:
+
+-   **Increased feature richness**: I really like how Productive kept the
+    feature set to a bare minimum. Here are your habits for the day, here are
+    your stats for each habit, and here's how you migrate habits.
+
+    By constrast, Todoist and Remember the Milk have extremely powerful grammars
+    that fit well with superusers, but at least for me, cost a learning curve
+    that I didn't want to pay off the bat and didn't see myself needing (I need
+    a way to update a habit's frequency, but I don't need to filter habits by a
+    particular tag).
+
+-   **Targeted towards organizations**: Both Todoist and Remember the Milk have
+    enterprise plans for teams, and I'm guessing that most of their revenue
+    comes from charging enterprise prices for usage of their platforms by teams
+    and organizations, like most SaaS companies. If I had to guess, they are
+    optimizing the single-user platform to make the transition to multi-user
+    capabilities as seamless as possible, hence things like single-user feature
+    richness. Productive at least doesn't have this aspiration, and optimizes
+    the experience for a single user. I like this notion of targeting a single
+    user and wish to keep it for TinyDevCRM.
 
 #### CRMs
 

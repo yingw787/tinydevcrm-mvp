@@ -348,11 +348,42 @@ stakeholders for personal use. The vast majority of CRM solutions are
 enterprise-first, targeted towards non-technical stakeholders and users, and not
 a fit at all for my needs.
 
+#### Integrations Frameworks
+
+There's actually quite a few integrations frameworks available, which suit the
+needs of technical stakeholders and users like me far better.
+
+-   **[Zapier](https://zapier.com/home)**:
+
+-   **[tray.io](https://tray.io/)**:
+
+-   **[IFTTT](https://ifttt.com/)**:
+
+-   **[`huginn`](https://github.com/huginn/huginn)**:
+
+-   **[`n8n.io`](https://n8n.io/)**: `n8n` markets itself as a "Free and
+    Self-hostable Alternative to Zapier / tray.io". It seems nice.
+
+    But it's based on `node` and the `npm` ecosystem. I'm not sure if I have to
+    explain why the `node` ecosystem isn't attractive for a project that
+    hopefully lasts a lifetime without too much change. I generally find `node`
+    to generate extremely pretty clients, but at the cost of resource usage
+    intensity and stability. For example, I use `gtop` on my IBM ThinkPad T42
+    from 2003, and while I keep `gtop` running because I haven't used my T42 for
+    too much yet, and because I want to know my computer is still alive, `gtop`
+    alone consumes 10% of my Intel Pentium, while everything else takes up
+    around 0.1% CPU (including `htop`, which I keep running in a concurrent
+    window using `tmux`).
+
+    Immediately disqualified.
+
 ### 3. Are there other products or tools that we can, should, or need to integrate with?
 
 > Does the product include a wearable device? Does it need to tie into other
 > internal or external systems? Integrations will shape both the design and
 > development approach, so knowing about them from the get-go is ideal.
+
+Most
 
 ## Business Discovery
 

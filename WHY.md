@@ -435,10 +435,50 @@ the underlying ISA. Everything else should be disposable or mutable as needed.
 > Will the product help with sales? Will it provide impactful data? What is the
 > reason our business is seeking to create the software?
 
+If I were to "categorize" myself as the "business", I would be creating the
+software in order to maximize my personal tooling / infrastructure workflows. I
+think it will go a long ways towards creating stronger relationships, keeping
+track of things better, minimizing regret, and maximizing antifragile behaviors.
+
 ### 5. What does success look like, and how will we measure it?
 
 > Understanding expectations is crucial. Work with your team to create a shared
 > understanding of what success is and how you might measure it.
+
+This is an absolutely great question! Coming up with heuristics is quite hard,
+so let me see how many I can list:
+
+-   If I can create both a tele-rolodex and a habit tracker *without having the
+    need to create any server-side processes* or stand up my own database and
+    segment my data, that would be a major validator that TinyDevCRM is a
+    platform. As in, I can re-use TinyDevCRM's authentication protocols, I can
+    see what habits are being tracked via TinyDevCRM's dashboards, and I feel no
+    need to augment TinyDevCRM for the express purposes of making my clients
+    easier to develop.
+
+-   *Time to create a client is measured in days or hours or even minutes
+    instead of weeks*. For example, it'd be really cool to have some JavaScript
+    embedded widgets that can create an analytics dashboard akin to [Apache
+    Graphite](https://graphiteapp.org/)'s dashboard in a few hours instead of
+    weeks. Something like MailChimp's plain embedded forms feature, where it
+    serves up a tiny amount of HTML / CSS, no JavaScript, with the API doing all
+    validation, would be very cool to do.
+
+    I don't care for something pretty; pretty faces age. I care deeply about
+    something that can stand the test of time, while still being as useful as
+    the day I made it. Something that does the job and then gets out of the way.
+
+I would measure success using metrics like:
+
+-   number of dependencies involved, and how many of them are properly licensed,
+    vendored, and audited to measure build complexity and maintainability
+-   test coverage reports (branch coverage, PBT results, formal modeling and
+    race condition analysis, etc.) to measure application correctness
+-   resource utilization reports (CPU, I/O, memory / swap, # of live sockets,
+    disk usage) to measure application efficiency
+-   profiling / instrumentation reports, to measure application performance
+-   lines of code (LOC), number of regressions introduced, etc. to measure
+    application simplicity and composability
 
 ### 6. What business risks or blockers exist?
 

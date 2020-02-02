@@ -486,11 +486,39 @@ I would measure success using metrics like:
 > but IT is booked out for 6 months? Is there a stakeholder who has the true
 > vision of the product ,but they'll be on leave at the start of the project?
 
+I do want this to increase my BATNA (best alternative to negotiated agreement),
+but I'm not sure how. I don't think increasing my technical skills will
+necessarily improve my BATNA the same way as trying to monetize this tool as a
+product. If I do try to monetize this, for example to recoup my AWS bills, I'm
+concerned about user direction steering this product that I intend to use for
+myself.
+
+I'm thinking in this case, I would build this application the way I want to and
+attempt to de-risk the product and software development aspect of building a
+"business", and if significant user interest exists, then fork the project into
+"BiggerDevCRM" or something, with [enterprise-grade feature
+support](https://enterpriseready.io) and work on the sales / marketing aspect of
+building a business.
+
+Technical blockers shouldn't really exist (something that would block software
+development entirely), since this idea is already proved out and used by Stripe
+internally (though I have no visibility into how that's done at all). I just
+*know* it's possible, from a first-principles perspective.
+
 ### 7. Who are the key stakeholders, and what kind of access will we have to them?
 
 > Use this time to map out who your stakeholders are and set expectations for
 > how engaged you will need them to be. How might you ensure the project never
 > gets blocked from a lack of stakeholder feedback?
+
+I am the only stakeholder in this project for now. If I do decide to monetize
+this tool, other stakeholders will be paying customers only. I don't intend on
+taking on investment for this tool, and if I do intend on monetizing, I will be
+choosing a very specific niche of like-minded thinkers, in order to remove
+issues of alignment or shared understanding (and consequently, build a more
+powerful product by making certain assumptions about the end user).
+
+Access will likely be from email primarily.
 
 ## User Discovery
 
@@ -498,6 +526,17 @@ I would measure success using metrics like:
 
 > At the end of the day, we're building the software for people. Who are those
 > people? What are their goals, motivations, and frustrations?
+
+I will be the one primarily using the product.
+
+My goal is to mitigate risk and regret going into the future. I want a
+consistent and stable tool powerful enough to platform other tools, where I have
+personally audited and sourced all dependencies and confirmed this is a product
+that I myself trust and dogfood on.
+
+My frustrations revolve around unnecessary product changes, data loss and data
+integrity issues, inability to create arbitrary user-defined extensions, and
+broken code or broken features.
 
 ### 9. What value are we providing to users?
 
@@ -512,11 +551,22 @@ I would measure success using metrics like:
 > a villainous persona gets their hands on our software? Determine what the
 > risks are so we can design to mitigate them?
 
+Significant damage could exist if a poorly intentioned user has access to this
+product. After locking down and building to feature parity, the next immediate
+concern is security and permissioning.
+
+Ideally, all data will be locked at a high (row-level or cell-level)
+granularity, and a comprehensive permissioning system will exist in order to
+monitor user access.
+
 ### 11. Will we have access to users for research and testing?
 
 > Having access to users is crucial for validating the overall product and
 > workflows we create. Be sure to begin the process of locating and scheduling
 > time with users as soon as you can.
+
+I intend on posting occasionally to Hacker News, Lobste.rs, YC Startup School,
+and Pioneer.app in order to garner feedback.
 
 ## Project Discovery
 
@@ -526,6 +576,32 @@ I would measure success using metrics like:
 > itself tied to a specific time of year? It's important to know if there are
 > date-sensitive deliverables to ensure on-time delivery is achieved.
 
+**February 3rd, 3AM ET**: Pioneer.app progress submission deadline.
+
+**February 6th**: YC Startup School Winter 2020 Group Session 2
+
+**February 8th**: depart for Chicago to see friends. I will be embarrassed if I
+don't have something ready by this date (1 week's time) to show off.
+
+**February 10th, 3AM ET**: Pioneer.app progress submission deadline.
+
+**February 13th**: DC Hack and Tell Meetup
+
+**February 17th, 3AM ET**: Pioneer.app progress submission deadline.
+
+**February 20th**: YC Startup School Winter 2020 Group Session 3
+
+**February 24th, 3AM ET**: Pioneer.app progress submission deadline.
+
+**March 2nd, 3AM ET**: Pioneer.app progress submission deadline.
+
+**March 5th**: YC Startup School Winter 2020 Group Session 4
+
+**March 12th**: YC Startup School Winter 2020 Group Session 5 **(TRY TO FINISH
+UP TINYDEVCRM BY THIS DATE)**
+
+**March 16th, 8PM PT**: Deadline to apply to Y Combinator's Summer 2020 batch.
+
 ### 13. What are the expected deliverables?
 
 > The detailed scope of the projet will shape over time, but at the start of a
@@ -533,11 +609,19 @@ I would measure success using metrics like:
 > it an API? Does part of the project include training and onboarding the
 > customer's developers once the product is ready to hand off?
 
+High-level deliverables:
+
+-   A client-side dashboard that can provide visibility into user data
+
+-
+
 ### 14. Who is the primary decision maker?
 
 > At the end of the day, who gets to make the final decisions? This ideally
 > should be one person, in order to avoid a decision paralysis or design by
 > committee.
+
+I am, period.
 
 ### 15. How might we best work together?
 

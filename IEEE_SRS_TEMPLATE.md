@@ -3,10 +3,10 @@
 Copyright 1999 Karl E. Wiegers
 
 I believe this document (translated from [PDF](srs_template-ieee.pdf) to
-Markdown for better online support and compressability) complies with [IEEE
-Standard 830-1998](IEEE-Std-830-1998.pdf) defined best practices, and I plan to
-apply this documentation standard for TinyDevCRM going forward into product
-development.
+Markdown for better parsing support, performance, and blob size) complies with
+[IEEE Standard 830-1998](IEEE-Std-830-1998.pdf) defined best practices, and I
+plan to apply this documentation standard for TinyDevCRM going forward into
+product development.
 
 __________
 
@@ -28,13 +28,28 @@ __________
 
 ## Revision History
 
+Name | Date | Reason For Changes | Version
+--- | --- | --- | ---
+${NAME} | ${DATE} | ${REASON_FOR_CHANGES} | ${VERSION}
+
 __________
 
 ## 1. Introduction
 
 ### 1.1 Purpose
 
+*Identify the product whose software requirements are specified in this
+document, including the revision or release number. Describe the scope of the
+product that is covered by this SRS, particularly if this SRS describes only
+part of the system or a single subsystem.*
+
 ### 1.2 Document Conventions
+
+*Describe any standards or typographical conventions that were followed when
+writing this SRS, such as fonts or highlighting that have special significance.
+For example, state whether priorities for higher-level requirements are assumed
+to be inherited by detailed requirements, or whether every requirement statement
+is to have its own priority.*
 
 ### 1.3 Intended Audience and Reading Suggestions
 

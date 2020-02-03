@@ -17,7 +17,7 @@ DOCKER_CONTAINER_NAME='tinydevcrm-mvp'
 
 $DOCKER pull $DOCKER_BASE_IMAGE
 
-$DOCKER build $GIT_REPO_ROOT \
+$DOCKER build $GIT_REPO_ROOT/src \
     --tag $DOCKER_IMAGE_NAME
 
 CONTAINER_EXISTS=$($DOCKER ps -a --format '{{ .Names }}' --filter name=$DOCKER_CONTAINER_NAME)
@@ -30,4 +30,5 @@ fi
 $DOCKER run \
     --name $DOCKER_CONTAINER_NAME \
     --network=host \
+    --volume=$(pwd):/app \
     -it $DOCKER_IMAGE_NAME

@@ -31,4 +31,4 @@ $DOCKER run \
     --name $DOCKER_CONTAINER_NAME \
     --network=host \
     --volume=$(pwd):/app \
-    -it $DOCKER_IMAGE_NAME
+    -itd $DOCKER_IMAGE_NAME

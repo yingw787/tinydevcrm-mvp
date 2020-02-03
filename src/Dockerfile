@@ -37,3 +37,5 @@ RUN apt-get -y update
 RUN apt-get install -y postgresql-12
 RUN apt-get install -y postgresql-client-12
 RUN apt-get install -y postgresql-contrib-12
+
+ENTRYPOINT [ "/app/entrypoint.sh" ]

@@ -33,10 +33,9 @@ This expounded into a broader thought process as to how I can build a platform
 that could generalize these two use cases, and future-proof against any other
 use cases that would crop up with respect to my personal development workflows,
 and perhaps some work-related use cases as well (e.g. a client process to remind
-me to rotate my personal passwords, and rotate my work-related AWS IAM keys, in
-order to follow AWS security best practices, or a Google Home or
-$SMART_DEVICE_OF_THE_DECADE client in order to keep track of my habits in
-addition to the web client).
+me to rotate my personal passwords, or rotate my personal AWS IAM keys, or a
+Google Home or $SMART_DEVICE_OF_THE_DECADE client in order to keep track of my
+habits in addition to an always-available web client).
 
 I found the most powerful commonalities between these use cases as:
 

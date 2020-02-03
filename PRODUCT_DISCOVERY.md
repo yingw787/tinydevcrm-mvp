@@ -33,61 +33,83 @@ This expounded into a broader thought process as to how I can build a platform
 that could generalize these two use cases, and future-proof against any other
 use cases that would crop up with respect to my personal development workflows,
 and perhaps some work-related use cases as well (e.g. a client process to remind
-me to rotate my personal passwords, or rotate my personal AWS IAM keys, or a
-Google Home or $SMART_DEVICE_OF_THE_DECADE client in order to keep track of my
-habits in addition to an always-available web client).
+me to rotate my personal passwords, or a work-related client to rotate my AWS
+IAM keys in accordance to company policy, or a Google Home or
+$SMART_DEVICE_OF_THE_DECADE habit tracker client in addition to an
+always-available web-based habit tracker client).
 
-I found the most powerful commonalities between these use cases as:
+I found some of the most powerful commonalities between these use cases as:
 
-- **Exposing (properly permissioned) access to relevant underlying data**
+-   **Exposing (properly permissioned) access to the relevant underlying data**
 
-- **Maintaining some protocol to connect to third-party extensions**
+-   **Maintaining some protocol to connect to third-party extensions /
+    integrations**
 
-- **Triggering events and notifying third-party processes of said events**
+-   **Triggering events to send to and notify third-party processes**
 
 An application that can expose these three properties to a developer building a
 client application, and reduce / remove the burden of having to build out a
-separate data store, data management services, and server-side processes, may
-drastically improve time-to-market or time-to-production for arbitrary clients,
-and provide a central location for data management and prevent and/or preclude
-data fragmentation and data discovery needs down the line.
+separate backend and data store, and run resource-intensive server-side
+processes, may drastically improve time-to-market or time-to-production for
+arbitrary clients, and provide a central location for data management and
+prevent and/or preclude separate data fragmentation and data discovery
+requirements down the line.
 
 ### 2. Is there a similar product on the market? If so, how will we differentiate from it?
 
-> Benchmarking what other products exist is a great exercise to do during a
-> Research, Design, and Planning phase. Use this time to understand how this
-> product will be different. What value is it adding that others are lacking?
+>   Benchmarking what other products exist is a great exercise to do during a
+>   Research, Design, and Planning phase. Use this time to understand how this
+>   product will be different. What value is it adding that others are lacking?
 
 This idea came into my mind during a conversation I had with an engineer at
 Stripe around their favorite internal tooling. I'm not sure how much I should
 say about their response in official writing, given how I have not been granted
 explicit permission to share our private conversation publicly, but I will say
-that their response greatly inspired this idea.
+that their response greatly inspired this idea. Suffice it to say I cautiously
+assess this idea as possible from a first-principles perspective, and useful in
+a personal and businesslike context.
 
 With respect to my immediate problem areas and discovery into platform
-consolidation, here are some products that I've either used, tried out, or
-looked at.
+consolidation, here are some products directly or tangentially related to
+TinyDevCRM that I've either personally used, evaluated, or examined.
 
 #### Habit Trackers
 
 **[Productive](http://productiveapp.io/) (USED)**: Productive is a generic iOS
-habit tracker. I've used the product now for about two years or so, and so there
-are things I love about the product and things I don't like:
+habit tracker. I've used the product now for about two years.
 
 Pros:
 
 -   **Native mobile support**: Productive is a native iOS application (vs.
     something like a [progressive web
     application](https://en.wikipedia.org/wiki/Progressive_web_application)),
-    which means in-app push notifications (no need to install another native
-    application like [Pushover](https://pushover.net/)), touch-first and
-    swipe-first UI/UX, etc.
+    which means no need to install a native application to access native
+    features. For example, a PWA may need to install
+    [Pushover](https://pushover.net) to access native iOS notifications. A
+    native application like Pushover can also make assumptions about UI/UX
+    workflows, such as optimizing for touch and swipe gesture control, as
+    opposed to text-based or graphical cursors or keyboard shortcuts.
 
--   **Offline-first access**: I don't need to have an Internet network
-    connection through cellular or Wi-Fi in order to access or use the
-    application, since the master copy of the data is colocated with the
-    application at all times. The application can go wherever my iPhone goes.
-    This is a *huge* win in comparison to a purely Internet-based client.
+    This is important to TinyDevCRM because since there's no such thing as a
+    lossless translation (React Native, hybrid clouds, etc.), any connectors or
+    adapters written in support of any clients to enable interop with
+    third-party infrastructure should not be impeded by TinyDevCRM's
+    development.
+
+-   **Offline-first access**: I don't need to have an active Internet network
+    connection in order to access or use the application, since the master copy
+    of the data is colocated with the application at all times. The application
+    can go wherever my iPhone goes. This is a *huge* win in comparison to a
+    purely Internet-based client, since the application can be used without
+    having to turn on cellular data, and can be used in environments where
+    Internet may be spotty or unavailable. The client only needs to depend on
+    what's available on the device, and flushes to any server asynchronously for
+    backup or sync purposes.
+
+    This implies TinyDevCRM should enable platformed clients to safely resolve
+    data synchronization issues with as few issues as possible, and upon seeing
+    synchronization issues, display them to the TinyDevCRM client in order to
+    avoid having to dive into the actual PostgreSQL table.
 
 -   **Forgiving UI/UX**: Unlike other habit trackers, Productive does not
     enforce default habits (you can start with however many habits makes you
@@ -103,6 +125,10 @@ Pros:
     likely the biggest reason I successfully onboarded and converted to the
     application in the first place, and conversely failed to convert to other
     platforms.
+
+    This is important to TinyDevCRM as various client-side grammars may need to
+    map to one or more relational tables, and TinyDevCRM should at least not
+    impede development of these grammars.
 
 Cons:
 
@@ -128,16 +154,29 @@ Cons:
     I would love to have a habit tracker that supports could-native backups,
     encrypted end-to-end and encrypted at-rest.
 
+    TinyDevCRM should enforce a property-based guarantee that no data loss or
+    data integrity issues can be forced by any client.
+
 -   **Lack of third-party developer extensibility**: Productive.app is a closed
     environment with no available developer API. This means that additional
     analytics and view representations around habits cannot be tracked beyond
     what the app developers have provided. It also means that no extensions
     ecosystem is possible.
 
+    TinyDevCRM should make it easy for clients to support various protocols. For
+    example, in addition to the traditional request / response client / server
+    relationship (via HTTP / REST), it may also need to support pub / sub or
+    another protocol for event generation.
+
 -   **Opaque underlying data representation**: I have no idea how my data is
     saved. I would not be surprised if a NoSQL backing, and the lack of highly
     structured migrations causes the application upgrade process to result in
     the data loss I've been experiencing.
+
+    TinyDevCRM should absolutely expose the relevant data to the user's owner.
+    I'm concerned about what this may mean from a maintainer's perspective (if I
+    have `sudoers` access on the box, how can others trust me), but having data
+    encrypted at rest and decrypted with a client-side decryption key may work.
 
 -   **UI/UX changes**: I don't remember which founder said this (maybe from
     Basecamp, or Fog Creek, or MicroConf), but they said the only way in order
@@ -151,6 +190,10 @@ Cons:
     have families to feed and investors to please, and the changes aren't bad,
     it's just that for me in this specific context, I don't like change.
 
+    TinyDevCRM should aim for a "done" point, where only platformed clients
+    change from time to time and updates involve security updates or external
+    protocol support upgrades.
+
 Ultimately, I found the cons to outweigh the pros. The data loss and lack of
 visibility into the underlying data representation and confidence in application
 upgrades prove especially egregious to my personal workflows. Considering how
@@ -158,7 +201,9 @@ much my personal workflow affects how effective I am at other parts of my life,
 I consider it my top pressure point. I do think this application stands heads
 and shoulders above everything else I've tried (which is why I gladly pay money
 to Productive for usage of the application), but I think I've acquired enough
-skills to take a shot at this problem myself.
+skills to take a shot at this problem myself. TinyDevCRM done right should play
+a part in abstracting much of the underlying complexity behind building a habit
+tracker.
 
 __________
 
@@ -439,33 +484,39 @@ software in order to maximize my personal tooling / infrastructure workflows. I
 think it will go a long ways towards creating stronger relationships, keeping
 track of things better, minimizing regret, and maximizing antifragile behaviors.
 
+In addition, this tool can ideally serve as the basis for an underlying data
+lake architecture for businesses, although TinyDevCRM isn't targeted towards
+businesses. Account-based authentication, automated agents (bot helpers), and
+other business-like features can still prove useful to personal infrastructure
+optimization.
+
 ### 5. What does success look like, and how will we measure it?
 
 > Understanding expectations is crucial. Work with your team to create a shared
 > understanding of what success is and how you might measure it.
 
-This is an absolutely great question! Coming up with heuristics is quite hard,
-so let me see how many I can list:
+Coming up with heuristics is quite hard, so this list is most likely incomplete:
 
 -   If I can create both a tele-rolodex and a habit tracker *without having the
     need to create any server-side processes* or stand up my own database and
-    segment my data, that would be a major validator that TinyDevCRM is a
-    platform. As in, I can re-use TinyDevCRM's authentication protocols, I can
-    see what habits are being tracked via TinyDevCRM's dashboards, and I feel no
-    need to augment TinyDevCRM for the express purposes of making my clients
-    easier to develop.
+    segment my data, that would be a major validator that TinyDevCRM acts as a
+    useful platform. As in, I can re-use TinyDevCRM's authentication protocols,
+    I can see what habits are being tracked via TinyDevCRM's dashboards, and I
+    feel no need to augment TinyDevCRM for the express purposes of making my
+    clients easier to develop.
 
--   *Time to create a client is measured in days or hours or even minutes
-    instead of weeks*. For example, it'd be really cool to have some JavaScript
-    embedded widgets that can create an analytics dashboard akin to [Apache
-    Graphite](https://graphiteapp.org/)'s dashboard in a few hours instead of
-    weeks. Something like MailChimp's plain embedded forms feature, where it
-    serves up a tiny amount of HTML / CSS, no JavaScript, with the API doing all
-    validation, would be very cool to do.
+-   *Time to create a barebones client is measured in days or hours or even
+    minutes instead of weeks*. For example, it'd be really cool to have some
+    HTML/CSS embedded widgets that can create an analytics dashboard akin to
+    [Apache Graphite](https://graphiteapp.org/)'s dashboard in a few hours
+    instead of weeks. Something like MailChimp's plain / advanced embedded forms
+    feature, where it serves up a tiny amount of HTML / CSS, with minimal
+    JavaScript, and the API doing all validation, would be very cool to do.
 
-    I don't care for something pretty; pretty faces age. I care deeply about
-    something that can stand the test of time, while still being as useful as
-    the day I made it. Something that does the job and then gets out of the way.
+-   I would say if I dogfood TinyDevCRM and I don't miss having Productive, and
+    I'm not at all worried about the application silently crashing and feel the
+    need to check uptime status constantly, I would say TinyDevCRM has crossed
+    the Rubicon in terms of usability.
 
 I would measure success using metrics like:
 
@@ -485,6 +536,10 @@ I would measure success using metrics like:
 > but IT is booked out for 6 months? Is there a stakeholder who has the true
 > vision of the product ,but they'll be on leave at the start of the project?
 
+There aren't realistically too many business risks or business blockers, since
+this isn't designed towards becoming a business, and since this is a greenfield
+project with no business-level dependencies.
+
 I do want this to increase my BATNA (best alternative to negotiated agreement),
 but I'm not sure how. I don't think increasing my technical skills will
 necessarily improve my BATNA the same way as trying to monetize this tool as a
@@ -499,11 +554,6 @@ attempt to de-risk the product and software development aspect of building a
 support](https://enterpriseready.io) and work on the sales / marketing aspect of
 building a business.
 
-Technical blockers shouldn't really exist (something that would block software
-development entirely), since this idea is already proved out and used by Stripe
-internally (though I have no visibility into how that's done at all). I just
-*know* it's possible, from a first-principles perspective.
-
 ### 7. Who are the key stakeholders, and what kind of access will we have to them?
 
 > Use this time to map out who your stakeholders are and set expectations for
@@ -517,7 +567,7 @@ choosing a very specific niche of like-minded thinkers, in order to remove
 issues of alignment or shared understanding (and consequently, build a more
 powerful product by making certain assumptions about the end user).
 
-Access will likely be from email primarily.
+Access between me and any paying customers would mosty likey be through email.
 
 ## User Discovery
 
@@ -528,20 +578,27 @@ Access will likely be from email primarily.
 
 I will be the one primarily using the product.
 
-My goal is to mitigate risk and regret going into the future. I want a
-consistent and stable tool powerful enough to platform other tools, where I have
-personally audited and sourced all dependencies and confirmed this is a product
-that I myself trust and dogfood on.
+My goal is to optimize my life going into the future. I want a consistent and
+stable tool powerful enough to platform other tools, where I have personally
+audited and sourced all dependencies and confirmed this is a product that I
+myself trust and dogfood on, all this in order to ensure I remain functioning at
+a high level.
 
-My frustrations revolve around unnecessary product changes, data loss and data
-integrity issues, inability to create arbitrary user-defined extensions, and
-broken code or broken features.
+My frustrations around existing solutions revolve around unnecessary product
+changes, data loss and data integrity issues, inability to create arbitrary
+user-defined extensions, and broken code or broken features, which typically are
+issues of communications, lack of alignment, or external forcing functions like
+delivering returns.
 
 ### 9. What value are we providing to users?
 
 > Why would folks be inclined to use the tool we're creating? Understanding how
 > we are providing value to users will help us determine which features to
 > include and how to prioritize them.
+
+Ideally, I would provide myself with the value of supercharging my personal
+tooling / infrastructure workflows, and my personal development workflows, over
+the very long term with minimal additional effort after feature parity.
 
 ### 10. What risks exist if a poor-intentioned user has access to the product?
 
@@ -552,11 +609,12 @@ broken code or broken features.
 
 Significant damage could exist if a poorly intentioned user has access to this
 product. After locking down and building to feature parity, the next immediate
-concern is security and permissioning.
+concern would be security and permissioning.
 
-Ideally, all data will be locked at a high (row-level or cell-level)
-granularity, and a comprehensive permissioning system will exist in order to
-monitor user access.
+Ideally, all data will be locked at a fina granularity (row-level or
+cell-level), and a comprehensive permissioning system will exist in order to
+monitor user access. This will comprise part of the journey towards feature
+parity and isn't meant as an add-on feature.
 
 ### 11. Will we have access to users for research and testing?
 
@@ -565,7 +623,9 @@ monitor user access.
 > time with users as soon as you can.
 
 I intend on posting occasionally to Hacker News, Lobste.rs, YC Startup School,
-and Pioneer.app in order to garner feedback.
+and Pioneer.app in order to garner feedback. Otherwise, I will see whether I can
+use TinyDevCRM, and start building out my habit tracker and tele-rolodex tool to
+see what might be missing from TinyDevCRM.
 
 ## Project Discovery
 
@@ -599,7 +659,9 @@ don't have something ready by this date (1 week's time) to show off.
 **March 12th**: YC Startup School Winter 2020 Group Session 5 **(TRY TO FINISH
 UP TINYDEVCRM BY THIS DATE)**
 
-**March 16th, 8PM PT**: Deadline to apply to Y Combinator's Summer 2020 batch.
+**March 16th, 8PM PT**: Deadline to apply to Y Combinator's Summer 2020 batch. I
+would hope that before this date TinyDevCRM would be finished, and I could pitch
+BiggerDevCRM (a B2B version of this application) as part of any YC application.
 
 ### 13. What are the expected deliverables?
 
@@ -610,9 +672,15 @@ UP TINYDEVCRM BY THIS DATE)**
 
 High-level deliverables:
 
--   A client-side dashboard that can provide visibility into user data
+-   A client-side dashboard that can provide visibility into user data, a way to
+    easily create and integrate protocol-based events, and a way to upload,
+    update, and migrate data.
 
--
+-   A server-side process that can deliver what the client needs, and maintain
+    the database.
+
+-   A tool in order to package all this functionality up into an RPM / .deb
+    file.
 
 ### 14. Who is the primary decision maker?
 

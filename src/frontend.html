@@ -3,12 +3,17 @@
     <head>
     </head>
     <body>
-        <!-- <form action="http://localhost:5000/upload" method="post" enctype="multitype/form-data"> -->
         <form action="http://localhost:5000/upload" method="post" enctype="multipart/form-data">
             Select CSV file to upload:<br>
             <input type="file" name="file" id="fileToUpload"><br>
             Last name:<br>
-            <input type="submit" value="Upload CSV" name="submit">
+            <input type="submit" value="Upload CSV to create '/tmp/sample.csv'" name="submit">
+          </form>
+
+          <br/><br/><br/>
+
+          <form action="http://localhost:5000/save-csv-to-db" method="get" enctype="multipart/form-data">
+            <input type="submit" value="Save '/tmp/sample.csv' to DB" name="submit">
           </form>
     </body>
 </html>

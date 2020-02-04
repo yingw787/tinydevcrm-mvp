@@ -21,5 +21,12 @@ dependencies:
   - wheel=0.34.1=py38_0
   - xz=5.2.4=h14c3975_4
   - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - click==7.0
+    - flask==1.1.1
+    - itsdangerous==1.1.0
+    - jinja2==2.11.1
+    - markupsafe==1.1.1
+    - werkzeug==0.16.1
 prefix: /home/yingw787/anaconda3/envs/backend
 

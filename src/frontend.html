@@ -13,7 +13,13 @@
           <br/><br/><br/>
 
           <form action="http://localhost:5000/save-csv-to-db" method="get" enctype="multipart/form-data">
-            <input type="submit" value="Save '/tmp/sample.csv' to DB" name="submit">
+            <input type="submit" value="Save '/tmp/sample.csv' to DB 'postgres' Table 'sample'" name="submit">
+          </form>
+
+          <br/><br/><br/>
+
+          <form action="http://localhost:5000/create-materialized-view" method="get" enctype="multipart/form-data">
+            <input type="submit" value="Create materialized view 'mat_view' on table 'sample'" name="submit">
           </form>
     </body>
 </html>

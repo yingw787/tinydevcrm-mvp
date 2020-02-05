@@ -54,5 +54,28 @@ def save_csv_to_db():
 
     return "Successfully inserted CSV file '/tmp/sample.csv' to PostgreSQL table 'sample'."
 
+@app.route('/create-materialized-view', methods=['GET'])
+def create_materialized_view():
+    # This is a psql random number generator; it takes fractional seconds, so
+    # the values should change faster than a materialized view can refresh.
+    #
+    # SELECT CAST( EXTRACT(SECOND FROM NOW()) * 1000000 AS INTEGER) % 10
+
+    # SELECT * FROM sample WHERE "SomeNumber" = CAST( EXTRACT(SECOND FROM NOW()) * 1000000 AS INTEGER) % 10;
+
+    psql_conn = psycopg2.connect(dbname="postgres", user="postgres", password="postgres", host="localhost", port=5432)
+    psql_cursor = psql_conn.cursor()
+
+    if request.method == 'GET':
+        psql_cursor.execute('DROP MATERIALIZED VIEW IF EXISTS mat_view;')
+        psql_cursor.execute('CREATE MATERIALIZED VIEW mat_view AS SELECT * FROM sample WHERE "SomeNumber" = CAST( EXTRACT( SECOND FROM NOW()) * 1000000 AS INTEGER) % 10;')
+        psql_conn.commit()
+
+    psql_cursor.close()
+    psql_conn.close()
+
+    return "Successfully create materialized view 'mat_view' in PostgreSQL database 'postgres' and table 'postgres'."
+
+
 if __name__=="__main__":
     app.run()

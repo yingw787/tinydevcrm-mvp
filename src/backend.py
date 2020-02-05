@@ -71,10 +71,47 @@ def create_materialized_view():
         psql_cursor.execute('CREATE MATERIALIZED VIEW mat_view AS SELECT * FROM sample WHERE "SomeNumber" = CAST( EXTRACT( SECOND FROM NOW()) * 1000000 AS INTEGER) % 10;')
         psql_conn.commit()
 
+        psql_cursor.execute('SELECT * FROM mat_view;')
+        result = psql_cursor.fetchall()
+
+        print(f'Result of psql cursor SELECT * FROM mat_view: {result}')
+
     psql_cursor.close()
     psql_conn.close()
 
     return "Successfully create materialized view 'mat_view' in PostgreSQL database 'postgres' and table 'postgres'."
+
+@app.route('/refresh-materialized-view', methods=['GET'])
+def refresh_materialized_view():
+    psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
+    psql_cursor = psql_conn.cursor()
+
+    if request.method == 'GET':
+        psql_cursor.execute('SELECT * FROM mat_view;')
+        result = psql_cursor.fetchall()
+
+        print('Refreshing materialized view.')
+        print(f'Materialized view before refresh: {result}')
+
+        psql_cursor.execute('REFRESH MATERIALIZED VIEW mat_view;')
+        psql_conn.commit()
+
+        print('Materialized view refreshed.')
+
+        psql_cursor.execute('SELECT * FROM mat_view;')
+        result = psql_cursor.fetchall()
+
+        print(f'Materialized view after refresh: {result}')
+
+    psql_cursor.close()
+    psql_conn.close()
+
+    return "Materialized view should be refreshed."
+
+
+# TODO: pg_cron to schedule materialized view refreshes every minute
+
+# TODO: pub/sub channel to notify services about materialized view refresh
 
 
 if __name__=="__main__":

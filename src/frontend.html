@@ -6,7 +6,9 @@
         <form action="http://localhost:5000/upload" method="post" enctype="multipart/form-data">
             Select CSV file to upload:<br>
             <input type="file" name="file" id="fileToUpload"><br>
-            Last name:<br>
+
+            <br/>
+
             <input type="submit" value="Upload CSV to create '/tmp/sample.csv'" name="submit">
           </form>
 
@@ -26,6 +28,12 @@
 
           <form action="http://localhost:5000/refresh-materialized-view" method="get" enctype="multipart/form-data">
             <input type="submit" value="Refresh materialized view 'mat_view'" name="submit">
+          </form>
+
+          <br/><br/><br/>
+
+          <form action="http://localhost:5000/register-view-with-job-scheduler" method="get" enctype="multipart/form-data">
+            <input type="submit" value="Register materialized view 'mat_view' with 'pg_cron'" name="submit">
           </form>
     </body>
 </html>

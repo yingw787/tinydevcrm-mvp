@@ -108,9 +108,10 @@ def refresh_materialized_view():
 
     return "Materialized view should be refreshed."
 
-# TODO: pg_cron to schedule materialized view refreshes every minute
-@app.route('/setup-job-scheduler-for-mat-view', methods=['GET'])
+@app.route('/register-view-with-job-scheduler', methods=['GET'])
 def setup_job_scheduler_for_materialized_view():
+    # Use pg_cron to refresh all materialized views on a per-minute granularity
+
     # NOTE: pgCron is a global thing, I don't think it's appropriate to expose
     # that via an endpoint, need to Dockerize this in order to script pg cron
     # setup.
@@ -145,7 +146,30 @@ def setup_job_scheduler_for_materialized_view():
     #
     # yingw787=#
     #
-    pass
+    # It WORKS
+    #
+    # OH MY GOODNESS AWS RDS doesn't allow you to install your own PostgreSQL
+    # extensions...it looks like I probably have to package all of this as an
+    # EC2 instance or a Docker thing for final deployment after all...
+    #
+    # Do 'SELECT * FROM cron.job' in order to see the full list of cron jobs
+    #
+    psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
+    psql_cursor = psql_conn.cursor()
+
+    cron_pid = None
+
+    if request.method == 'GET':
+        # Handle duplicates and what not later, just get it in
+        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'REFRESH MATERIALIZED VIEW mat_view');")
+        psql_conn.commit()
+
+        cron_pid = psql_cursor.fetchone()[0]
+
+    psql_cursor.close()
+    psql_conn.close()
+
+    return f'Successfully scheduled job with pg_cron on database "postgres". Cron PID should be {cron_pid}.'
 
 # TODO: pub/sub channel to notify services about materialized view refresh
 

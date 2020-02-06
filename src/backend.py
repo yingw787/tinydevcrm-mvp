@@ -108,8 +108,44 @@ def refresh_materialized_view():
 
     return "Materialized view should be refreshed."
 
-
 # TODO: pg_cron to schedule materialized view refreshes every minute
+@app.route('/setup-job-scheduler-for-mat-view', methods=['GET'])
+def setup_job_scheduler_for_materialized_view():
+    # NOTE: pgCron is a global thing, I don't think it's appropriate to expose
+    # that via an endpoint, need to Dockerize this in order to script pg cron
+    # setup.
+
+    # Apparently pg_cron package archive may only be for PostgreSQL 11; need to
+    # build myself in order to use PostgreSQL 12.
+    #
+    # Git clone source.
+    #
+    # Need to change path because I'm not using PostgreSQL 11.
+    # export PATH=/usr/lib/postgresql/12/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+    #
+    # Then I need to install postgresql-server-dev-NN for building a service-side extension.
+    # sudo apt-get install -y postgresql-server-dev-12
+    #
+    # make && sudo PATH=$PATH make install
+    #
+    # Got the problem of not setting conf parameters:
+    #
+    # yingw787=# CREATE EXTENSION pg_cron;
+    # ERROR:  unrecognized configuration parameter "cron.database_name"
+    # CONTEXT:  PL/pgSQL function inline_code_block line 3 at IF
+    # yingw787=#
+    #
+    # I need to edit the conf file:
+    #
+    # yingw787=# SHOW config_file;
+    #                config_file
+    # -----------------------------------------
+    #  /etc/postgresql/12/main/postgresql.conf
+    # (1 row)
+    #
+    # yingw787=#
+    #
+    pass
 
 # TODO: pub/sub channel to notify services about materialized view refresh
 

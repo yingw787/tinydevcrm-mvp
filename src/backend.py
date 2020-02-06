@@ -197,7 +197,7 @@ def setup_job_scheduler_for_materialized_view():
 
     if request.method == 'GET':
         # Handle duplicates and what not later, just get it in
-        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'REFRESH MATERIALIZED VIEW mat_view');")
+        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'REFRESH MATERIALIZED VIEW mat_view; INSERT INTO matview_refresh_events(matview_name, status, status_change_time) VALUES (''mat_view'', ''new'', NOW());')")
         psql_conn.commit()
 
         cron_pid = psql_cursor.fetchone()[0]

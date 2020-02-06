@@ -189,7 +189,55 @@ def setup_job_scheduler_for_materialized_view():
     return f'Successfully scheduled job with pg_cron on database "postgres". Cron PID should be {cron_pid}.'
 
 # TODO: pub/sub channel to notify services about materialized view refresh
+#
+# Woah there's not only PL/pgSQL but also PL/Python (though its completely
+# untrusted so anybody can do everything)
+#
+# There's both plpythonu2 and plpythonu3
+@app.route('publish-mat-view-changes-to-channel', methods=['GET'])
+def publish_materialized_view_changes_to_channel():
+    import ipdb
+    ipdb.set_trace()
 
+    psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
+    psql_cursor = psql_conn.cursor()
+
+    # Created file trigger_on_mat_view_refresh.sql
+    #
+    # I think this may have to be run as part of shutils or subprocess
+    # shell=True, but I don't think it can be run as part of psycopg2 since it's
+    # partially procedural and not pure SQL.
+    #
+    # Having problems with postgres authentication via the command line. This is
+    # due to configuration with pg_hba.conf.
+    #
+    # https://stackoverflow.com/a/18664239/1497211
+    #
+    # Update user 'postgres' from 'peer' to 'md5'.
+    #
+    # Restarted PostgreSQL database, and I think cron job will persist because
+    # it is stored as part of table 'cron.job'; \c postgres or relevant database
+    # after logging in.
+    #
+    # I don't think you can fire a trigger based on a materialized view refresh
+    # event...I think you need to probably modify the job scheduler in order to
+    # insert a value into a matview_refresh_view table and then send an event
+    # based on an update of a concrete table.
+    #
+    # The nice thing about that is that you can also get "logging" for free as
+    # well.
+    #
+    # I wonder whether you can auto limit the size of the table as a rolling
+    # window, so that way you don't use too much disk. I think this should be
+    # possible since you can create triggers based on updates only, and deletes
+    # / inserts count as their own thing.
+    if request.method == 'GET':
+        pass
+
+    psql_cursor.close()
+    psql_conn.close()
+
+    return "Published materialized view changes to channel."
 
 if __name__=="__main__":
     app.run()

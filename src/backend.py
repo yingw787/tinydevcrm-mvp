@@ -115,6 +115,18 @@ def refresh_materialized_view():
 
     return "Materialized view should be refreshed."
 
+@app.route('/create-matview-refreshes-table', methods=['GET'])
+def create_materialized_view_refreshes_table():
+    # Run file create_matview_refreshes_table.sql
+    path = os.path.abspath(os.path.join(
+        os.path.dirname(__file__),
+        'create_matview_refreshes_table.sql'
+    ))
+
+    subprocess.call(f'PGPASSWORD=postgres psql -U postgres -d postgres -af {path}', shell=True)
+
+    return "Table should be created properly."
+
 @app.route('/register-view-with-job-scheduler', methods=['GET'])
 def setup_job_scheduler_for_materialized_view():
     # Use pg_cron to refresh all materialized views on a per-minute granularity

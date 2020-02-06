@@ -154,6 +154,23 @@ def setup_job_scheduler_for_materialized_view():
     #
     # Do 'SELECT * FROM cron.job' in order to see the full list of cron jobs
     #
+    # Hmm, cron job doesn't seem to be running; make sure that it has auth for
+    # user running the cron job
+    #
+    # https://stackoverflow.com/a/44657411/1497211
+    #
+    # Find the hba_file using PostgreSQL, because users can place it anywhere
+    #
+    # SHOW hba_file; /etc/postgresql/12/main/pg_hba.conf
+    #
+    # Added to hba file 'local all yingw787 peer'
+    #
+    # Then I ran "UPDATE cron.job SET nodename = '';"
+    #
+    # Then I added "SELECT cron.schedule('* * * * *', 'SELECT 1');"
+    #
+    # It appears after all this the cron is updating successfully!!
+    #
     psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
     psql_cursor = psql_conn.cursor()
 

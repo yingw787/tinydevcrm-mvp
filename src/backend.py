@@ -1,14 +1,21 @@
 import os
-from flask import Flask, flash, request
+from flask import Flask, flash, request, send_from_directory
 from werkzeug.utils import secure_filename
 import psycopg2
+import subprocess
 
 UPLOAD_FOLDER = '/tmp'
 ALLOWED_EXTENSIONS = {'csv'}
 
-app = Flask(__name__)
+# Set the project root directory as the static folder, you can set others.
+app = Flask(__name__, static_folder='')
 app.secret_key = "secret_key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+@app.route('/', methods=['GET'])
+def send_html():
+    # See flask static_folder=''
+    return app.send_static_file('frontend.html')
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
@@ -194,7 +201,7 @@ def setup_job_scheduler_for_materialized_view():
 # untrusted so anybody can do everything)
 #
 # There's both plpythonu2 and plpythonu3
-@app.route('publish-mat-view-changes-to-channel', methods=['GET'])
+@app.route('/publish-mat-view-changes-to-channel', methods=['GET'])
 def publish_materialized_view_changes_to_channel():
     import ipdb
     ipdb.set_trace()

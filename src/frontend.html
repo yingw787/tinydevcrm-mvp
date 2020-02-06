@@ -35,5 +35,11 @@
           <form action="http://localhost:5000/register-view-with-job-scheduler" method="get" enctype="multipart/form-data">
             <input type="submit" value="Register materialized view 'mat_view' with 'pg_cron'" name="submit">
           </form>
+
+          <br/><br/><br/>
+
+          <form action="http://localhost:5000/publish-mat-view-changes-to-channel" method="get" enctype="multipart/form-data">
+            <input type="submit" value="Register cron job with pub/sub channel" name="submit">
+          </form>
     </body>
 </html>

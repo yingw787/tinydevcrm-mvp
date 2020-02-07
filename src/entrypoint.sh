@@ -4,11 +4,10 @@
 # configuration begins.
 
 # Start, then configure, PostgreSQL.
-service postgresql start &
-sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+service postgresql start
 
 # Start the Flask backend server.
-python3 /app/backend.py &
+# python3 /app/backend.py &
 
 # Keep the container running.
 tail -f /dev/null

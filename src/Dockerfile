@@ -2,6 +2,13 @@
 
 FROM ubuntu:18.04
 
+# Configure environment variables.
+ENV PGUSER=postgres
+ENV PGDATABASE=postgres
+ENV PGPASSWORD=postgres
+ENV PGHOST=localhost
+ENV PGPORT=5432
+
 # Configure environment variables for Docker build process.
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -15,6 +22,8 @@ RUN apt-get install -y ca-certificates
 RUN apt-get install -y gnupg
 RUN apt-get install -y lsb-core
 RUN apt-get install -y sudo
+RUN apt-get install -y git
+RUN apt-get install -y vim
 
 # Install PostgreSQL 12.x from PostgreSQL .deb package archive. Note that as of
 # February 3rd, 2020, the Ubuntu default package archive contains PostgreSQL
@@ -48,20 +57,27 @@ RUN python3 -m pip install flask
 RUN python3 -m pip install ipdb
 RUN python3 -m pip install psycopg2
 
-# Install development dependencies.
-RUN apt-get install -y vim
-
-# Configure environment variables.
-ENV PGUSER=postgres
-ENV PGDATABASE=postgres
-ENV PGPASSWORD=postgres
-ENV PGHOST=localhost
-ENV PGPORT=5432
-
+# Configure PostgreSQL.
+#
 # See:
 # https://stackoverflow.com/a/48245676/1497211
 # https://stackoverflow.com/q/39223249/1497211
 RUN service postgresql start && \
     sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+
+# Install PostgreSQL extension 'pg_cron' from Citus Data
+RUN git clone \
+    https://github.com/citusdata/pg_cron.git \
+    $HOME/pg_cron
+ENV PATH=/usr/lib/postgresql/12/bin:${PATH}
+RUN cd $HOME/pg_cron && \
+    make && \
+    sudo PATH=${PATH} make install
+
+RUN echo "shared_preload_libraries = 'pg_cron'" >> \
+    /etc/postgresql/12/main/postgresql.conf
+
+RUN echo "cron.database_name = 'postgres'" >> \
+    /etc/postgresql/12/main/postgresql.conf
 
 ENTRYPOINT [ "/app/entrypoint.sh" ]

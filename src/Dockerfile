@@ -37,5 +37,14 @@ RUN apt-get -y update
 RUN apt-get install -y postgresql-12
 RUN apt-get install -y postgresql-client-12
 RUN apt-get install -y postgresql-contrib-12
+RUN apt-get install -y postgresql-server-dev-12
+
+# Install `pip` for `python3`.
+RUN apt-get install -y python3-pip
+
+# Install `python3` dependencies for app backend.
+RUN python3 -m pip install flask
+RUN python3 -m pip install ipdb
+RUN python3 -m pip install psycopg2
 
 ENTRYPOINT [ "/app/entrypoint.sh" ]

@@ -14,6 +14,7 @@ RUN apt-get install -y curl
 RUN apt-get install -y ca-certificates
 RUN apt-get install -y gnupg
 RUN apt-get install -y lsb-core
+RUN apt-get install -y sudo
 
 # Install PostgreSQL 12.x from PostgreSQL .deb package archive. Note that as of
 # February 3rd, 2020, the Ubuntu default package archive contains PostgreSQL

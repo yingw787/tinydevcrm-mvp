@@ -48,4 +48,20 @@ RUN python3 -m pip install flask
 RUN python3 -m pip install ipdb
 RUN python3 -m pip install psycopg2
 
+# Install development dependencies.
+RUN apt-get install -y vim
+
+# Configure environment variables.
+ENV PGUSER=postgres
+ENV PGDATABASE=postgres
+ENV PGPASSWORD=postgres
+ENV PGHOST=localhost
+ENV PGPORT=5432
+
+# See:
+# https://stackoverflow.com/a/48245676/1497211
+# https://stackoverflow.com/q/39223249/1497211
+RUN service postgresql start && \
+    sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgres';"
+
 ENTRYPOINT [ "/app/entrypoint.sh" ]

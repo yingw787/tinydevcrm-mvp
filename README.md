@@ -139,9 +139,78 @@ picked up:
     shouldn't have to deal with blob storage, and ideally I can keep disk space
     available for the database itself.
 
+-   I still find the fact that `psycopg2` doesn't have context management for
+    its PostgreSQL connection and cursor frustrating. I don't understand the
+    intricacies of the project, but I'm not sure why it's so hard to implement
+    `__enter__` and `__exit__`. I am worried about what might happen if there
+    are a bunch of dangling PostgreSQL connections due to poor error handling
+    over a long period of time. I'll need to keep an eye out for this, and
+    ensure that I keep the number of concurrent connections down to a minimum,
+    and maybe some way in order to notify me of dangling connections.
+
+-   I'm not sure whether the RFC-4180 compliant CSV parser will be a thing.
+    Ideally, I would want a POSIX-compatible tool to translate CSV files into
+    Parquet files, since Parquet files have a highly structured schema and
+    they're a framework-agnostic binary format. I trust Parquet much more and
+    that others can put together a fully-featured and correct Parquet parser
+    than a CSV parser. Right now, the PostgreSQL `COPY sample FROM STDIN` works
+    fine and I have larger concerns in working towards feature parity.
+
 -   The 'pg_cron' project by Citus Data only publishes packages for PostgreSQL
     11.x, not PostgreSQL 12.x. In order to support PostgreSQL 12.x, I needed to
     build the project from source myself. This wasn't difficult at all, but it
     underlines how different open-source projects march to the beat of their own
     drums, and you the core developer must remain ready to create your own build
     pipeline.
+
+-   You can't attach a PostgreSQL trigger based onto a refresh materialized view
+    command directly. The [example blog post I
+    referenced](https://layerci.com/blog/postgres-is-the-answer/) when creating
+    this trigger inserts events into a PostgreSQL table, then creates a trigger
+    from every new row that has a particular status (like "new"). This concerns
+    me in that there's a constantly growing table that the database needs to
+    vaccum every so often. On the plus side, a log of events would really help
+    in terms of understanding the job scheduler.
+
+-   Log management in PostgreSQL is a big unknown to me. Cron job failures were
+    common during development, and I'm still not sure whether I need to call
+    `UPDATE cron.job SET nodename=''` after every `INSERT` statement into
+    `cron.job`. I need some way in order to extricate those logs and make them
+    visible to admin-level users; otherwise debugging cron job failures will be
+    quite a pain.
+
+-   There's not only PL/pgSQL, but also PL/Python as `LANGUAGE plpythonu`.
+    There's Python 2 and Python 3 versions of this procedural extension. I
+    didn't know this existed. The type translation is documented, but I don't
+    know how much I like it (e.g. `'f'` I think translates to `True` in Python
+    because it's not an empty string; however I believe this is `'False'` in
+    PL/pgSQL).
+
+-   I'm not sure how `pg_hba.conf` authentication levels like `md5` and `peer`
+    work. I need to read through the docs for this.
+
+-   I'm not sure how I might make all of this infrastructure stand up
+    dynamically. How would I save config changes?
+
+-   I'm not sure how pieces of this application are coupled together. I think
+    initially, a change that would break say a materialized view (maybe a SQL
+    migration) would simply drop the materialized view entirely. Later on, I
+    might recreate the materialized view automatically and ask the user whether
+    it's fine.
+
+-   I still want to stick to a princple of "done"-ness, and be able to entirely
+    down the build chain for this project as soon as possible.
+
+-   I'm elated that the job scheduler can reference all materialized views, and
+    that only one pub/sub channel is necessary in order to send events. The cron
+    job description and scheduling is how the frequency of job runs and what
+    aspects of data are touched by the job scheduler, and subscribers to the
+    pub/sub channel can disambiguate messages and send them to the right user or
+    service, which means permissioning can stay in hardcoded source code. This
+    should mean that only a minimal number of processes and sockets need to be
+    open at any time, rather than scaling linearly with the number of users
+    (which is something I feared). It also means permissioning shouldn't be too
+    hard. I did envision giving every year their own PostgreSQL user (properly
+    permissioned) in order for them to access their own data, views, and
+    triggers without compromising everybody else. It seems like this is possible
+    even with the current setup, or at least I see a path forward.

@@ -205,8 +205,12 @@ def setup_job_scheduler_for_materialized_view():
 
         psql_cursor.execute("SELECT cron.schedule('* * * * *', 'INSERT INTO matview_refresh_events(matview_name, status, status_change_time) VALUES (''mat_view'', ''new'', NOW())')")
         psql_conn.commit()
-
         cron_pid = psql_cursor.fetchone()[0]
+
+        # I think https://stackoverflow.com/a/44657411/1497211 has to take place
+        # after table cron.job takes place
+        psql_cursor.execute("UPDATE cron.job SET nodename=''")
+        psql_conn.commit()
 
     psql_cursor.close()
     psql_conn.close()

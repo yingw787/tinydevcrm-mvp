@@ -70,29 +70,49 @@ scope increase necessary to satisfy the requirements detailed on the [TinyDevCRM
 
 ## Installation & Getting Started
 
-1.  `git` clone this repository:
+```bash
+$ git clone \
+    https://github.com/yingw787/tinydevcrm-mvp.git \
+    /path/to/tinydevcrm-mvp
 
-    ```bash
-    $ git clone \
-        https://github.com/yingw787/tinydevcrm-mvp.git \
-        /path/to/tinydevcrm-mvp
+$ cd tinydevcrm-mvp
 
-    $ cd tinydevcrm-mvp
+$ . ./src/run.sh
 
-    $ . ./src/run.sh
+$ docker exec -it tinydevcrm-mvp bash
 
-    $ docker exec -it tinydevcrm-mvp bash
+# Go to localhost:5000, submit CSV file
+# 'src/sample.csv', and click every button on the page
+# in order from top to bottom.
 
-    # Inside Docker container
-    $ python3 /app/sub.py matview_refresh_channel
+# Inside Docker container
+$ python3 /app/sub.py matview_refresh_channel
 
-    # You should see the IDs of new rows added to table
-    # 'matview_refresh_events' in database 'postgres'.
-    ```
+# You should see the IDs of new rows added to table
+# 'matview_refresh_events' in database 'postgres'
+# every minute.
+```
 
 ## Lessons Learned
 
 This was a tremendous learning experience for me. Here's some of the things I
 picked up:
 
-- I wasn't familiar with HTTP POST requests. You can use a bare HTML
+-   I wasn't familiar with HTTP POST requests. This proof of concept uses a bare
+    HTML document to submit files to the backend API. After sending the file to
+    the backend API, *the file will exist on the backend server*. I had thought
+    there would be a way to reference the file in memory without having to save
+    it, like Flask would have a `FileDescriptor` object or something. I don't
+    think that's the case. This isn't a huge deal to me; since the file is a
+    transient state to the PostgreSQL table anyways, I need to load the file
+    from `/tmp` or wherever I had set `app.config['UPLOAD_FOLDER']` to be to a
+    PostgreSQL table, and then immediately delete the uploaded file. This way, I
+    shouldn't have to deal with blob storage, and ideally I can keep disk space
+    available for the database itself.
+
+-   The 'pg_cron' project by Citus Data only publishes packages for PostgreSQL
+    11.x, not PostgreSQL 12.x. In order to support PostgreSQL 12.x, I needed to
+    build the project from source myself. This wasn't difficult at all, but it
+    underlines how different open-source projects march to the beat of their own
+    drums, and you the core developer must remain ready to create your own build
+    pipeline.

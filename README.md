@@ -1,8 +1,13 @@
-# `tinydevcrm-mvp`: MVP for TinyDevCRM project.
+# `tinydevcrm-mvp`: Proof of concept for the TinyDevCRM project.
 
 ## Overview
 
-This is a minimal viable product (MVP) for [TinyDevCRM](https://tinydevcrm.com).
+This is a proof of concept for [TinyDevCRM](https://tinydevcrm.com).
+
+Originally, this was intended to be a minimal viable product (MVP), but since
+the technical merits of the project still needed to be proved out, I decided to
+use this purely as a technical learning exercise. I don't want to change the
+name of the project in case changing the URI will break unknown backlinks.
 
 ## Requirements
 
@@ -62,3 +67,32 @@ scope increase necessary to satisfy the requirements detailed on the [TinyDevCRM
     user authentication, testing, deployment, strict or non-strict loading of
     data, UI/UX workflow, or other kinds of best practices. I'm just getting
     something working.
+
+## Installation & Getting Started
+
+1.  `git` clone this repository:
+
+    ```bash
+    $ git clone \
+        https://github.com/yingw787/tinydevcrm-mvp.git \
+        /path/to/tinydevcrm-mvp
+
+    $ cd tinydevcrm-mvp
+
+    $ . ./src/run.sh
+
+    $ docker exec -it tinydevcrm-mvp bash
+
+    # Inside Docker container
+    $ python3 /app/sub.py matview_refresh_channel
+
+    # You should see the IDs of new rows added to table
+    # 'matview_refresh_events' in database 'postgres'.
+    ```
+
+## Lessons Learned
+
+This was a tremendous learning experience for me. Here's some of the things I
+picked up:
+
+- I wasn't familiar with HTTP POST requests. You can use a bare HTML

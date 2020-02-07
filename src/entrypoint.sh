@@ -4,7 +4,13 @@
 # configuration begins.
 
 # Start the PostgreSQL database.
-service postgresql start
+#
+# Need to start with '&' because otherwise postgresql will shut down after bash
+# script completes (?). Cannot script into Dockerfile.
+service postgresql start &
+
+# Start the Flask backend server.
+python3 /app/backend.py &
 
 # Keep the container running.
 tail -f /dev/null

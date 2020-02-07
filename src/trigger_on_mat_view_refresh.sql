@@ -12,6 +12,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS matview_refresh ON matview_refresh_events;
+
 CREATE TRIGGER matview_refresh
     AFTER INSERT OR UPDATE OF status
     ON matview_refresh_events

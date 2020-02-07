@@ -80,4 +80,7 @@ RUN echo "shared_preload_libraries = 'pg_cron'" >> \
 RUN echo "cron.database_name = 'postgres'" >> \
     /etc/postgresql/12/main/postgresql.conf
 
+RUN service postgresql start && \
+    sudo -u postgres psql -c "CREATE EXTENSION pg_cron;"
+
 ENTRYPOINT [ "/app/entrypoint.sh" ]

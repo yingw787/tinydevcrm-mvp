@@ -108,6 +108,25 @@ picked up:
     and details the workflow from start to finish graphically and interactively,
     which is what I need in order to begin work on the MVP.
 
+-   I found it difficult to iterate without having a dev server for the
+    frontend. I'm guessing this is what makes things like `webpack-dev-server`
+    so attractive. I don't want to include JavaScript at this stage of
+    development, so I used the Flask API `app.send_static_file()` in order to
+    send the HTML static file as the root route. Then, you can update the HTML
+    document and refresh the page, which leads to the updated document. It's
+    kind of like a dev server. On top of that, your frontend and your backend
+    are at the same URL, no `file://` searching, which makes it nice for
+    deployments because you know where all your assets are.
+
+    Forking static files is something that I might consider for the final
+    project, but I'm honestly leaning towards building a server-side rendered
+    static bundle at the moment. IMHO, having the backend server send files is
+    much less efficient than using a CDN, and it's just more work that might
+    result lead the server to crash given high enough load to resources. Also,
+    it's not great separation of concerns; despite it all I'd rather build a
+    bundle and edit the assets if I need to change them, rather than use Jinja
+    and potentially be limited by the given DSL.
+
 -   I wasn't familiar with HTTP POST requests. This proof of concept uses a bare
     HTML document to submit files to the backend API. After sending the file to
     the backend API, *the file will exist on the backend server*. I had thought

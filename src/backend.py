@@ -261,9 +261,6 @@ def publish_materialized_view_changes_to_channel():
     # https://www.endpoint.com/blog/2014/11/12/dear-postgresql-where-are-my-logs
     #
     # I'll probably only do this for the MVP, not for this proof of concept.
-    import ipdb
-    ipdb.set_trace()
-
     psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
     psql_cursor = psql_conn.cursor()
 

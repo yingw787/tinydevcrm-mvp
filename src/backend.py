@@ -190,6 +190,9 @@ def setup_job_scheduler_for_materialized_view():
     #
     # It appears after all this the cron is updating successfully!!
     #
+    # It stopped again. You can see the logs for services registered uing
+    # systemctl using command: 'journalctl -u postgresql'
+    #
     psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
     psql_cursor = psql_conn.cursor()
 
@@ -197,7 +200,10 @@ def setup_job_scheduler_for_materialized_view():
 
     if request.method == 'GET':
         # Handle duplicates and what not later, just get it in
-        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'REFRESH MATERIALIZED VIEW mat_view; INSERT INTO matview_refresh_events(matview_name, status, status_change_time) VALUES (''mat_view'', ''new'', NOW());')")
+        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'REFRESH MATERIALIZED VIEW mat_view')")
+        psql_conn.commit()
+
+        psql_cursor.execute("SELECT cron.schedule('* * * * *', 'INSERT INTO matview_refresh_events(matview_name, status, status_change_time) VALUES (''mat_view'', ''new'', NOW())')")
         psql_conn.commit()
 
         cron_pid = psql_cursor.fetchone()[0]
@@ -215,12 +221,6 @@ def setup_job_scheduler_for_materialized_view():
 # There's both plpythonu2 and plpythonu3
 @app.route('/publish-mat-view-changes-to-channel', methods=['GET'])
 def publish_materialized_view_changes_to_channel():
-    import ipdb
-    ipdb.set_trace()
-
-    psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
-    psql_cursor = psql_conn.cursor()
-
     # Created file trigger_on_mat_view_refresh.sql
     #
     # I think this may have to be run as part of shutils or subprocess
@@ -250,13 +250,31 @@ def publish_materialized_view_changes_to_channel():
     # window, so that way you don't use too much disk. I think this should be
     # possible since you can create triggers based on updates only, and deletes
     # / inserts count as their own thing.
+    #
+    # AGH cron stopped working
+    #
+    # See blog post about how to set destination for PostgreSQL logs:
+    # https://www.endpoint.com/blog/2014/11/12/dear-postgresql-where-are-my-logs
+    #
+    # I'll probably only do this for the MVP, not for this proof of concept.
+    import ipdb
+    ipdb.set_trace()
+
+    psql_conn = psycopg2.connect(dbname='postgres', user='postgres', password='postgres', host='localhost', port=5432)
+    psql_cursor = psql_conn.cursor()
+
     if request.method == 'GET':
-        pass
+        # Run trigger_on_mat_view_refresh.sql
+        path = os.path.abspath(os.path.join(
+            os.path.dirname(__file__),
+            'trigger_on_mat_view_refresh.sql'
+        ))
+        subprocess.call(f'PGPASSWORD=postgres psql -U postgres -d postgres -af {path}', shell=True)
 
     psql_cursor.close()
     psql_conn.close()
 
-    return "Published materialized view changes to channel."
+    return "Set trigger to publish materialized view changes to channel."
 
 if __name__=="__main__":
     app.run()

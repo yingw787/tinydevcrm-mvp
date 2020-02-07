@@ -98,6 +98,16 @@ $ python3 /app/sub.py matview_refresh_channel
 This was a tremendous learning experience for me. Here's some of the things I
 picked up:
 
+-   The frontend is *extremely* basic. It's literally just a cascade of buttons
+    detailing the workflow. I copied this from [W3School's tutorial on
+    multipart/form-data](https://www.w3schools.com/TAGs/tryit.asp?filename=tryhtml_form_enctype).
+    It offended my sensibilities as a former full-stack engineer to have
+    something so basic, but I'm really happy I was able to practice pioneering
+    and got something out the door. On top of that, the HTML file is pretty
+    parseable and intuitive, which lends well to a high signal-to-noise ratio,
+    and details the workflow from start to finish graphically and interactively,
+    which is what I need in order to begin work on the MVP.
+
 -   I wasn't familiar with HTTP POST requests. This proof of concept uses a bare
     HTML document to submit files to the backend API. After sending the file to
     the backend API, *the file will exist on the backend server*. I had thought
